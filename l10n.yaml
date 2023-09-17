@@ -1,0 +1,5 @@
+
+arb-dir: lib/res/values
+template_arb-file: app_en.arb
+output_localization-files: app_localizations.dart
+nullable-getter: false
