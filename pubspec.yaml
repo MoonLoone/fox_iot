@@ -25,3 +25,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - lib/res/assets/logo1.png
+    - lib/res/assets/icon_facebook.png
