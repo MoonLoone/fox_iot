@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fox_iot/auth/sign_in_page/pres/SignInPage.dart';
 import 'package:fox_iot/auth/sign_up_page/pres/SignUpPage.dart';
-import 'package:fox_iot/res/colors.dart';
+import 'package:fox_iot/res/values/assets.dart';
 import 'package:fox_iot/res/values/s.dart';
+import 'package:fox_iot/res/values/theme.dart';
 
 class WelcomeDialog extends StatelessWidget {
   const WelcomeDialog({super.key});
@@ -14,7 +15,7 @@ class WelcomeDialog extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: DecoratedBox(
-            decoration: BoxDecoration(color: FoxIoTTheme.tint.color)),
+            decoration: BoxDecoration(color: FoxIotTheme.colors.tint)),
       ),
       Center(
         child: SizedBox(
@@ -22,7 +23,7 @@ class WelcomeDialog extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.8,
             child: DecoratedBox(
                 decoration: BoxDecoration(
-                    color: FoxIoTTheme.primaryContainer.color,
+                    color: FoxIotTheme.colors.primaryContainer,
                     borderRadius: const BorderRadius.all(Radius.circular(32))),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +47,7 @@ class WelcomeDialog extends StatelessWidget {
                           maximumSize: MaterialStateProperty.all(Size(
                               MediaQuery.of(context).size.width * 0.4, 100)),
                           backgroundColor: MaterialStateProperty.all(
-                              FoxIoTTheme.primary.color),
+                              FoxIotTheme.colors.primary),
                           padding: MaterialStateProperty.all(
                               const EdgeInsets.all(20)),
                           shape: MaterialStateProperty.all(
@@ -55,7 +56,8 @@ class WelcomeDialog extends StatelessWidget {
                       child: Text(
                         S.of(context).signIn,
                         style: TextStyle(
-                            color: FoxIoTTheme.textPrimary.color, fontSize: 24),
+                            color: FoxIotTheme.colors.textPrimary,
+                            fontSize: 24),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -68,7 +70,7 @@ class WelcomeDialog extends StatelessWidget {
                           maximumSize: MaterialStateProperty.all(Size(
                               MediaQuery.of(context).size.width * 0.4, 100)),
                           backgroundColor: MaterialStateProperty.all(
-                              FoxIoTTheme.primary.color),
+                              FoxIotTheme.colors.primary),
                           padding: MaterialStateProperty.all(
                               const EdgeInsets.all(20)),
                           shape: MaterialStateProperty.all(
@@ -77,7 +79,8 @@ class WelcomeDialog extends StatelessWidget {
                       child: Text(
                         S.of(context).signUp,
                         style: TextStyle(
-                            color: FoxIoTTheme.textPrimary.color, fontSize: 24),
+                            color: FoxIotTheme.colors.textPrimary,
+                            fontSize: 24),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -91,21 +94,20 @@ class WelcomeDialog extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 16, right: 16),
                           child: Container(
                             decoration: BoxDecoration(
-                                color: FoxIoTTheme.textSecondary.color),
+                                color: FoxIotTheme.colors.textSecondary),
                             height: 1,
                           ),
                         )),
                         Text(
                           S.of(context).connect_using,
-                          style:
-                              TextStyle(color: FoxIoTTheme.textSecondary.color),
+                          style: FoxIotTheme.textStyles.primary,
                         ),
                         Expanded(
                             child: Padding(
                           padding: const EdgeInsets.only(left: 16, right: 16),
                           child: Container(
                             decoration: BoxDecoration(
-                                color: FoxIoTTheme.textSecondary.color),
+                                color: FoxIotTheme.colors.textSecondary),
                             height: 1,
                           ),
                         )),
@@ -115,9 +117,12 @@ class WelcomeDialog extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Image.asset("lib/res/assets/icon_facebook.png"),
-                        Image.asset("lib/res/assets/icon_facebook.png"),
-                        Image.asset("lib/res/assets/icon_facebook.png"),
+                        Image.asset(
+                            FoxIotTheme.assets[FoxIotAssetName.facebook]!.url),
+                        Image.asset(
+                            FoxIotTheme.assets[FoxIotAssetName.facebook]!.url),
+                        Image.asset(
+                            FoxIotTheme.assets[FoxIotAssetName.facebook]!.url),
                       ],
                     )
                     //Connect using networks

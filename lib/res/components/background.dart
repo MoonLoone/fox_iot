@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fox_iot/res/colors.dart';
+import 'package:fox_iot/res/values/theme.dart';
 
 class Background extends StatelessWidget {
   late StatefulWidget _childWidget;
@@ -14,7 +14,7 @@ class Background extends StatelessWidget {
     return SizedBox.expand(
         child: Stack(fit: StackFit.expand, children: [
       Container(
-        color: FoxIoTTheme.primaryContainer.color,
+        color: FoxIotTheme.colors.primaryContainer,
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
       ),
@@ -24,7 +24,7 @@ class Background extends StatelessWidget {
         heightFactor: 0.5,
         child: Container(
           decoration: BoxDecoration(
-              color: FoxIoTTheme.primary.color,
+              color: FoxIotTheme.colors.primary,
               borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(32),
                   bottomRight: Radius.circular(32))),

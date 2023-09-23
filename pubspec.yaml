@@ -28,3 +28,7 @@ flutter:
   assets:
     - lib/res/assets/logo1.png
     - lib/res/assets/icon_facebook.png
+    - lib/res/assets/visible_icon.png
+    - lib/res/assets/person_icon.png
+    - lib/res/assets/lock_passw_icon.png
+    - lib/res/assets/e_mail_icon.png

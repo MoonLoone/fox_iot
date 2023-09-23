@@ -1,5 +1,7 @@
 {
   "signIn": "Sign in",
   "signUp": "Sign up",
-  "connect_using": "Or connect with"
+  "connect_using": "Or connect with",
+  "e_mail": "E_mail",
+  "password": "Password"
 }
