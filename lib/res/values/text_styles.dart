@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
 class FoxTextStyles {
-  TextStyle primary;
-  TextStyle secondary;
-  TextStyle h1;
-  TextStyle h2;
-  TextStyle h3;
-  TextStyle h4;
+  final TextStyle primary;
+  final TextStyle secondary;
+  final TextStyle h1;
+  final TextStyle h2;
+  final TextStyle h3;
+  final TextStyle h4;
 
   FoxTextStyles(
-      this.primary, this.secondary, this.h1, this.h2, this.h3, this.h4);
+      {required this.primary,
+      required this.secondary,
+      required this.h1,
+      required this.h2,
+      required this.h3,
+      required this.h4});
 }

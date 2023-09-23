@@ -3,5 +3,7 @@
   "signUp": "Войти",
   "connect_using": "Войти с помощью",
   "e_mail": "E_mail",
-  "password": "Пароль"
+  "password": "Пароль",
+  "forgot_password": "Забыли пароль?"
+
 }

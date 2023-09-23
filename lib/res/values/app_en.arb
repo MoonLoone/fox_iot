@@ -3,5 +3,6 @@
   "signUp": "Sign up",
   "connect_using": "Or connect with",
   "e_mail": "E_mail",
-  "password": "Password"
+  "password": "Password",
+  "forgot_password": "Forgot password?"
 }

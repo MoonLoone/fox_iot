@@ -3,10 +3,12 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 
 class FoxIoTAssets {
-  String url;
-  Size size;
+  final String url;
+  final Size size;
 
-  FoxIoTAssets(this.url, this.size);
+  FoxIoTAssets({
+    required this.url,
+    required this.size});
 }
 
 enum FoxIotAssetName {
