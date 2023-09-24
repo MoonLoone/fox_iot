@@ -1,9 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fox_iot/auth/domain/IAuthRepo.dart';
-import 'package:fox_iot/auth/sign_in_page/SignInContracts.dart';
 import 'package:get_it/get_it.dart';
 
-class SignInBloc extends Bloc<SignInEvents, SignInState> {
+import '../models/LoadingState.dart';
+import 'SignInContracts.dart';
+
+class SignInBloc extends Bloc<SignInActions, SignInState> {
   SignInBloc() : super(const SignInState()) {
     on((event, emit) {
       if (event is VisibleIconClick) {

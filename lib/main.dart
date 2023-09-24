@@ -1,13 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_iot/auth/sign_in_page/SignInBloc.dart';
-import 'package:fox_iot/auth/sign_in_page/pres/SignInPage.dart';
-import 'package:fox_iot/auth/sign_up_page/pres/SignUpPage.dart';
+import 'package:fox_iot/auth/presentation/sign_up_page/SignUpBloc.dart';
 import 'package:fox_iot/di/Singleton.dart';
+import 'package:fox_iot/firebase_options.dart';
 import 'package:fox_iot/res/values/s.dart';
 import 'package:fox_iot/welcome_page/pres/welcome_page.dart';
 
-void main() {
+import 'auth/presentation/sign_in_page/SignInBloc.dart';
+import 'auth/presentation/sign_in_page/pres/SignInPage.dart';
+import 'auth/presentation/sign_up_page/pres/SignUpPage.dart';
+
+Future<void> main() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   registerSingletons();
   runApp(const FoxIoTApp());
 }
@@ -28,7 +33,10 @@ class FoxIoTApp extends StatelessWidget {
               create: (context) => SignInBloc(),
               child: SignInPage(),
             ),
-        SignUpPage.navId: (context) => SignUpPage()
+        SignUpPage.navId: (context) => BlocProvider(
+          create: (context) => SignUpBloc(),
+          child: SignUpPage(),
+        )
       },
     );
   }

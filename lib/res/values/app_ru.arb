@@ -4,6 +4,8 @@
   "connect_using": "Войти с помощью",
   "e_mail": "E_mail",
   "password": "Пароль",
-  "forgot_password": "Забыли пароль?"
-
+  "nickname": "Никнейм",
+  "forgot_password": "Забыли пароль?",
+  "main_info": "Основная информация",
+  "next": "Далее"
 }

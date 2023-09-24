@@ -1,14 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_iot/auth/sign_in_page/SignInBloc.dart';
-import 'package:fox_iot/auth/sign_in_page/SignInContracts.dart';
 import 'package:fox_iot/res/components/background.dart';
 import 'package:fox_iot/res/values/assets.dart';
 import 'package:fox_iot/res/values/theme.dart';
 
-import '../../../res/values/s.dart';
+import '../../../../res/values/s.dart';
+import '../SignInBloc.dart';
+import '../SignInContracts.dart';
 
 class SignInPage extends StatefulWidget {
   static const String navId = "sign_in_page";
@@ -23,7 +21,6 @@ class SignInPageState extends State<SignInPage> {
     return BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
       final loading = state.loadingState;
       final isPasswordVisible = state.isPasswordVisible;
-      log("$isPasswordVisible", name: "MyApp", level: 200);
       return Background(
           child: Scaffold(
               backgroundColor: Colors.amber.withOpacity(0),
@@ -70,11 +67,8 @@ class SignInPageState extends State<SignInPage> {
                                 style: FoxIotTheme.textStyles.primary,
                                 decoration: InputDecoration(
                                   fillColor: FoxIotTheme.colors.secondary,
-                                  prefixIcon: IconButton(
-                                    icon: Image.asset(FoxIotTheme
-                                        .assets[FoxIotAssetName.email]!.url),
-                                    onPressed: () {},
-                                  ),
+                                  prefixIcon: Image.asset(FoxIotTheme
+                                      .assets[FoxIotAssetName.email]!.url),
                                   hintText: S.of(context).e_mail,
                                   filled: true,
                                 ),
@@ -96,7 +90,8 @@ class SignInPageState extends State<SignInPage> {
                                           .assets[FoxIotAssetName.visible]!
                                           .url),
                                       onPressed: () {
-                                        BlocProvider.of<SignInBloc>(context).add(VisibleIconClick());
+                                        BlocProvider.of<SignInBloc>(context)
+                                            .add(VisibleIconClick());
                                       },
                                     ),
                                     hintText: S.of(context).password,

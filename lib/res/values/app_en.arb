@@ -4,5 +4,8 @@
   "connect_using": "Or connect with",
   "e_mail": "E_mail",
   "password": "Password",
-  "forgot_password": "Forgot password?"
+  "nickname": "Nickname",
+  "forgot_password": "Forgot password?",
+  "main_info": "Main Info",
+  "next": "Next"
 }

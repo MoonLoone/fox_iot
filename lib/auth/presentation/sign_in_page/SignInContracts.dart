@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+import '../models/LoadingState.dart';
+
 @immutable
 class SignInState {
   final String email;
@@ -26,12 +28,10 @@ class SignInState {
   }
 }
 
-enum LoadingState { loading, notLoading, error }
+abstract class SignInActions {}
 
-abstract class SignInEvents {}
+class SignInClick extends SignInActions {}
 
-class SignInClick extends SignInEvents {}
+class ForgotPasswordClick extends SignInActions {}
 
-class ForgotPasswordClick extends SignInEvents {}
-
-class VisibleIconClick extends SignInEvents {}
+class VisibleIconClick extends SignInActions {}
