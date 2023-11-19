@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "280060386093",
+    "project_id": "foxiot-c2a76",
+    "storage_bucket": "foxiot-c2a76.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280060386093:android:05b6f61ff948b98b1551a4",
+        "android_client_info": {
+          "package_name": "com.example.fox_iot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDskclhZyvhNQ57t2mQ5dYPbJDNbbt-Qcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
