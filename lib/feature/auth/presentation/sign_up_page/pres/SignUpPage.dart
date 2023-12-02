@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpContracts.dart';
+import 'package:fox_iot/res/components/navbar/navbar.dart';
+import 'package:fox_iot/res/components/navbar/navbar_states.dart';
 
 import '../../../../../res/components/background.dart';
 import '../../../../../res/values/assets.dart';

@@ -6,9 +6,7 @@ class FoxIoTAssets {
   final String url;
   final Size size;
 
-  FoxIoTAssets({
-    required this.url,
-    required this.size});
+  FoxIoTAssets({required this.url, required this.size});
 }
 
 enum FoxIotAssetName {
@@ -17,4 +15,12 @@ enum FoxIotAssetName {
   person,
   visible,
   facebook,
+  navbarHomeSelected,
+  navbarAccountSelected,
+  navbarDevicesSelected,
+  navbarRulesSelected,
+  navbarHomeUnselected,
+  navbarAccountUnselected,
+  navbarDevicesUnselected,
+  navbarRulesUnselected
 }

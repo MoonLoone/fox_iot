@@ -37,3 +37,11 @@ flutter:
     - lib/res/assets/person_icon.png
     - lib/res/assets/lock_passw_icon.png
     - lib/res/assets/e_mail_icon.png
+    - lib/res/assets/account_s.png
+    - lib/res/assets/devices_s.png
+    - lib/res/assets/home_s.png
+    - lib/res/assets/rules_s.png
+    - lib/res/assets/account_un.png
+    - lib/res/assets/devices_un.png
+    - lib/res/assets/home_un.png
+    - lib/res/assets/rules_un.png
