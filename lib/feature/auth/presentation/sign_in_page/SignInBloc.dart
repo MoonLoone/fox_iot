@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_iot/auth/domain/IAuthRepo.dart';
+import 'package:fox_iot/feature/auth/domain/IAuthRepo.dart';
 import 'package:get_it/get_it.dart';
 
 import '../models/LoadingState.dart';

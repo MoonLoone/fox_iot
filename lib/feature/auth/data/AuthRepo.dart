@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fox_iot/auth/domain/IAuthRepo.dart';
-import 'package:fox_iot/auth/domain/models/FoxIoTUser.dart';
+import 'package:fox_iot/feature/auth/domain/IAuthRepo.dart';
+import 'package:fox_iot/feature/auth/domain/models/FoxIoTUser.dart';
 
 extension on UserCredential {
   FoxIoTUser toDomainModel() =>

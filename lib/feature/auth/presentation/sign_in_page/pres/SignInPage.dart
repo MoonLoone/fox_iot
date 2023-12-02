@@ -4,7 +4,7 @@ import 'package:fox_iot/res/components/background.dart';
 import 'package:fox_iot/res/values/assets.dart';
 import 'package:fox_iot/res/values/theme.dart';
 
-import '../../../../res/values/s.dart';
+import '../../../../../res/values/s.dart';
 import '../SignInBloc.dart';
 import '../SignInContracts.dart';
 
