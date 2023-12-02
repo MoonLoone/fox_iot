@@ -3,7 +3,7 @@ import 'package:fox_iot/res/values/assets.dart';
 import 'package:fox_iot/res/values/s.dart';
 import 'package:fox_iot/res/values/theme.dart';
 
-import '../../../auth/presentation/sign_in_page/pres/SignInPage.dart';
+import '../../../auth/presentation/sign_in_page/SignInPage.dart';
 import '../../../auth/presentation/sign_up_page/pres/SignUpPage.dart';
 
 class WelcomeDialog extends StatelessWidget {

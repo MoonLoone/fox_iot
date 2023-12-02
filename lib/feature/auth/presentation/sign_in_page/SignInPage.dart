@@ -4,9 +4,9 @@ import 'package:fox_iot/res/components/background.dart';
 import 'package:fox_iot/res/values/assets.dart';
 import 'package:fox_iot/res/values/theme.dart';
 
-import '../../../../../res/values/s.dart';
-import '../SignInBloc.dart';
-import '../SignInContracts.dart';
+import '../../../../res/values/s.dart';
+import 'SignInBloc.dart';
+import 'SignInContracts.dart';
 
 class SignInPage extends StatefulWidget {
   static const String navId = "sign_in_page";
