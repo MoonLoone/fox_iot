@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpBloc.dart';
 import 'package:fox_iot/di/Singleton.dart';
+import 'package:fox_iot/feature/devices/presentation/devices_bloc.dart';
+import 'package:fox_iot/feature/devices/presentation/devices_page.dart';
 import 'package:fox_iot/res/values/s.dart';
 import 'package:fox_iot/feature/welcome_page/pres/welcome_page.dart';
 
@@ -26,7 +28,10 @@ class FoxIoTApp extends StatelessWidget {
       supportedLocales: S.supportedLocales,
       locale: S.locale,
       localizationsDelegates: S.localizationDelegates,
-      home:  const WelcomePage(),
+      home:BlocProvider(
+        create: (context) => DevicesBloc(),
+        child: DevicesPage(),
+      ), //const WelcomePage(),
       routes: {
         WelcomePage.navId: (context) => const WelcomePage(),
         SignInPage.navId: (context) => BlocProvider(
@@ -34,9 +39,13 @@ class FoxIoTApp extends StatelessWidget {
               child: SignInPage(),
             ),
         SignUpPage.navId: (context) => BlocProvider(
-          create: (context) => SignUpBloc(),
-          child: SignUpPage(),
-        )
+              create: (context) => SignUpBloc(),
+              child: SignUpPage(),
+            ),
+        DevicesPage.navId: (context) => BlocProvider(
+              create: (context) => DevicesBloc(),
+              child: DevicesPage(),
+            )
       },
     );
   }

@@ -7,11 +7,13 @@ import 'package:get_it/get_it.dart';
 class DevicesBloc extends Bloc<DevicesActions, DevicesState> {
   DevicesBloc() : super(const DevicesState()) {
     on((event, emit) {
-      /*if (event is ForgotPasswordClick) {
-        emit(state.updateState());
-      }*/
+      if (event is LoadDevices) {
+        deviceRepo
+            .getUserDevices()
+            .then((value) => emit(state.updateState(devices: value)));
+      }
     });
   }
 
-  IDeviceRepo authRepo = GetIt.I.get<IDeviceRepo>();
+  IDeviceRepo deviceRepo = GetIt.I.get<IDeviceRepo>();
 }

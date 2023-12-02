@@ -45,3 +45,7 @@ flutter:
     - lib/res/assets/devices_un.png
     - lib/res/assets/home_un.png
     - lib/res/assets/rules_un.png
+    - lib/res/assets/add_device.png
+    - lib/res/assets/undefined.png
+    - lib/res/assets/hub.png
+    - lib/res/assets/bulb.png
