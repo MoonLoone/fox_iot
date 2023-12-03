@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fox_iot/res/components/background.dart';
+import 'package:fox_iot/res/components/fox_iot_buttons.dart';
 import 'package:fox_iot/res/values/assets.dart';
 import 'package:fox_iot/res/values/theme.dart';
 
@@ -100,24 +101,8 @@ class SignInPageState extends State<SignInPage> {
                               const SizedBox(
                                 height: 24,
                               ),
-                              TextButton(
-                                onPressed: () {},
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        FoxIotTheme.colors.third),
-                                    padding: MaterialStateProperty.all(
-                                        const EdgeInsets.all(20)),
-                                    shape: MaterialStateProperty.all(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(100)))),
-                                child: Text(
-                                  S.of(context).signIn,
-                                  style: FoxIotTheme.textStyles.primary
-                                      .copyWith(
-                                          color: FoxIotTheme.colors.onThird),
-                                ),
-                              ),
+                              FoxIoTPrimaryButton(
+                                  null, null, S.of(context).signIn, () => null),
                               const SizedBox(
                                 height: 32,
                               ),

@@ -11,5 +11,6 @@
   "navbar_home": "Дом",
   "navbar_devices": "Устройства",
   "navbar_rules": "Правила",
-  "navbar_account": "Аккаунт"
+  "navbar_account": "Аккаунт",
+  "add_device": "Добавить устройство"
 }
