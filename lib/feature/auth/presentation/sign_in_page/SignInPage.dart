@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fox_iot/feature/home/home_page.dart';
 import 'package:fox_iot/res/components/background.dart';
 import 'package:fox_iot/res/components/fox_iot_buttons.dart';
 import 'package:fox_iot/res/values/assets.dart';
@@ -22,12 +23,13 @@ class SignInPageState extends State<SignInPage> {
     return BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
       final loading = state.loadingState;
       final isPasswordVisible = state.isPasswordVisible;
+      final SignInBloc signInBloc = BlocProvider.of<SignInBloc>(context);
       return Background(Scaffold(
           backgroundColor: Colors.amber.withOpacity(0),
           body: Stack(children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
+            FractionallySizedBox(
+              widthFactor: 1,
+              heightFactor: 1,
               child: DecoratedBox(
                   decoration: BoxDecoration(color: FoxIotTheme.colors.tint)),
             ),
@@ -45,9 +47,9 @@ class SignInPageState extends State<SignInPage> {
                   ],
                 )),
             Center(
-                child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.4,
-              height: MediaQuery.of(context).size.height * 0.6,
+                child: FractionallySizedBox(
+              widthFactor: 0.7,
+              heightFactor: 0.6,
               child: DecoratedBox(
                   decoration: BoxDecoration(
                       color: FoxIotTheme.colors.primaryContainer,
@@ -63,6 +65,7 @@ class SignInPageState extends State<SignInPage> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           TextField(
+                            controller: state.emailController,
                             style: FoxIotTheme.textStyles.primary,
                             decoration: InputDecoration(
                               fillColor: FoxIotTheme.colors.secondary,
@@ -76,6 +79,7 @@ class SignInPageState extends State<SignInPage> {
                             height: 24,
                           ),
                           TextField(
+                            controller: state.passwordController,
                             textAlignVertical: TextAlignVertical.center,
                             style: FoxIotTheme.textStyles.primary,
                             decoration: InputDecoration(
@@ -87,8 +91,7 @@ class SignInPageState extends State<SignInPage> {
                                   icon: Image.asset(FoxIotTheme
                                       .assets[FoxIotAssetName.visible]!.url),
                                   onPressed: () {
-                                    BlocProvider.of<SignInBloc>(context)
-                                        .add(VisibleIconClick());
+                                    signInBloc.add(VisibleIconClick());
                                   },
                                 ),
                                 hintText: S.of(context).password,
@@ -98,7 +101,16 @@ class SignInPageState extends State<SignInPage> {
                             height: 24,
                           ),
                           FoxIoTPrimaryButton(
-                              null, null, S.of(context).signIn, () => null),
+                              null,
+                              null,
+                              S.of(context).signIn,
+                              () => signInBloc.add(SignInClick(
+                                  email: state.emailController.text,
+                                  password: state.passwordController.text,
+                                  navigateWhenAuth: () {
+                                    Navigator.pushNamed(
+                                        context, HomePage.navId);
+                                  }))),
                           const SizedBox(
                             height: 32,
                           ),

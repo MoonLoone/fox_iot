@@ -8,17 +8,20 @@ extension on UserCredential {
 }
 
 class AuthRepo extends IAuthRepo {
+
+  late final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   @override
   Future<FoxIoTUser> createUser(String email, String password) async {
-    return (await FirebaseAuth.instance
+    return (await _firebaseAuth
             .createUserWithEmailAndPassword(email: email, password: password))
-        .toDomainModel();
+            .toDomainModel();
   }
 
   @override
   Future<FoxIoTUser> authorize(String email, String password) async {
-    return (await FirebaseAuth.instance
+    return (await _firebaseAuth
             .signInWithEmailAndPassword(email: email, password: password))
-        .toDomainModel();
+            .toDomainModel();
   }
 }

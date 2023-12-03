@@ -25,9 +25,9 @@ class SignUpPageState extends State<SignUpPage> {
       return Background(Scaffold(
           backgroundColor: Colors.amber.withOpacity(0),
           body: Stack(children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
+            FractionallySizedBox(
+              widthFactor: 1,
+              heightFactor: 1,
               child: DecoratedBox(
                   decoration: BoxDecoration(color: FoxIotTheme.colors.tint)),
             ),
@@ -45,9 +45,9 @@ class SignUpPageState extends State<SignUpPage> {
                   ],
                 )),
             Center(
-                child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.4,
-              height: MediaQuery.of(context).size.height * 0.6,
+                child: FractionallySizedBox(
+              widthFactor: 0.7,
+              heightFactor: 0.6,
               child: DecoratedBox(
                   decoration: BoxDecoration(
                       color: FoxIotTheme.colors.primaryContainer,

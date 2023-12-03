@@ -6,13 +6,17 @@ import '../../../../utils/models/LoadingState.dart';
 import 'SignInContracts.dart';
 
 class SignInBloc extends Bloc<SignInActions, SignInState> {
-  SignInBloc() : super(const SignInState()) {
-    on((event, emit) {
+  SignInBloc() : super(SignInState()) {
+    on((event, emit) async {
       if (event is VisibleIconClick) {
         emit(state.updateState(isPasswordVisible: !state.isPasswordVisible));
       }
       if (event is SignInClick) {
         emit(state.updateState(loadingState: LoadingState.loading));
+        if (event.email == null || event.password == null) return;
+        await authRepo
+            .authorize(event.email!, event.password!)
+            .then((value) => event.navigateWhenAuth!());
       }
       if (event is ForgotPasswordClick) {
         emit(state.updateState());
