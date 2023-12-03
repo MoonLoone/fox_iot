@@ -37,33 +37,36 @@ class _DevicesPageState extends State<DevicesPage> {
           children: [
             Expanded(
                 flex: 6,
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          S.of(context).add_device,
-                          style: FoxIotTheme.textStyles.h4,
-                        ),
-                        const SizedBox(
-                          height: 32,
-                        ),
-                        Image.asset(FoxIotTheme
-                                .assets[FoxIotAssetName.addDevice]?.url ??
-                            FoxIotTheme.assets[FoxIotAssetName.undefined]!.url),
-                        const SizedBox(
-                          height: 32,
-                        ),
-                        FoxIoTPrimaryButton(
-                            null,
-                            null,
-                            S.of(context).add_device,
-                            () => Navigator.pushNamed(
-                                context, BlueDevicesPage.navId))
-                      ]),
-                ])),
+                child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              S.of(context).add_device,
+                              style: FoxIotTheme.textStyles.h4,
+                            ),
+                            const SizedBox(
+                              height: 32,
+                            ),
+                            Image.asset(FoxIotTheme
+                                    .assets[FoxIotAssetName.addDevice]?.url ??
+                                FoxIotTheme
+                                    .assets[FoxIotAssetName.undefined]!.url),
+                            const SizedBox(
+                              height: 32,
+                            ),
+                            FoxIoTPrimaryButton(
+                                null,
+                                null,
+                                S.of(context).add_device,
+                                () => Navigator.pushNamed(
+                                    context, BlueDevicesPage.navId))
+                          ]),
+                    ])),
             Expanded(
                 flex: 5,
                 child: Padding(

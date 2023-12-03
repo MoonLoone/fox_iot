@@ -17,32 +17,36 @@ class BluetoothImpl extends IBluetooth {
   }
 
   @override
-  Future<bool> connectToDevice(BlueDevice bluetoothDevice) {
-    // TODO: implement connectToDevice
-    throw UnimplementedError();
+  Future<bool> connectToDevice(BlueDevice bluetoothDevice) async {
+    await bluetoothDevice.bluetoothDevice.connect();
+    return _flutterBlue.connectedDevices
+        .then((value) => value.contains(bluetoothDevice.bluetoothDevice));
   }
 
   @override
-  Future<bool> disconnectFromDevice(BlueDevice bluetoothDevice) {
-    // TODO: implement disconnectFromDevice
-    throw UnimplementedError();
+  Future<bool> disconnectFromDevice(BlueDevice bluetoothDevice) async {
+    await bluetoothDevice.bluetoothDevice.disconnect();
+    return _flutterBlue.connectedDevices
+        .then((value) => !value.contains(bluetoothDevice.bluetoothDevice));
   }
 
   @override
-  Future<bool> receiveDataFromDevice(BlueDevice bluetoothDevice) {
-    // TODO: implement receiveDataFromDevice
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> sendDataToDevice(BlueDevice bluetoothDevice, String data) {
-    // TODO: implement sendDataToDevice
-    throw UnimplementedError();
+  Future<bool> sendDataToDevice(BlueDevice bluetoothDevice, String data) async {
+    List<BluetoothService> services =
+        await bluetoothDevice.bluetoothDevice.discoverServices();
+    if (services.isEmpty || services.first.characteristics.isEmpty) {
+      return false;
+    }
+    for (BluetoothCharacteristic c in services.first.characteristics) {
+      await c.write([0x12, 0x34]);
+    }
+    return true;
   }
 
   List<BlueDevice> convertResultsToBlueDevices(List<ScanResult> results) {
     return results
-        .map((ScanResult result) => BlueDevice(name: result.device.name))
+        .map((ScanResult result) =>
+            BlueDevice(result.device, name: result.device.name))
         .toList();
   }
 }

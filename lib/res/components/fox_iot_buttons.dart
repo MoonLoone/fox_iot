@@ -15,27 +15,29 @@ class FoxIoTPrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: () {
-          onClick();
-        },
-        style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all(FoxIotTheme.colors.third),
-            padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(100)))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (trailingItem != null) trailingItem!,
-            Text(
-              btnText ?? "",
-              style: FoxIotTheme.textStyles.primary
-                  .copyWith(color: FoxIotTheme.colors.onThird),
-            ),
-            if (leadingItem != null) leadingItem!
-          ],
-        ));
+    return SizedBox(
+        width: 240,
+        child: TextButton(
+            onPressed: () {
+              onClick();
+            },
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(FoxIotTheme.colors.third),
+                padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100)))),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (trailingItem != null) trailingItem!,
+                Text(
+                  btnText ?? "",
+                  style: FoxIotTheme.textStyles.primary
+                      .copyWith(color: FoxIotTheme.colors.onThird),
+                ),
+                if (leadingItem != null) leadingItem!
+              ],
+            )));
   }
 }

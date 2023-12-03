@@ -12,5 +12,7 @@
   "navbar_devices": "Устройства",
   "navbar_rules": "Правила",
   "navbar_account": "Аккаунт",
-  "add_device": "Добавить устройство"
+  "add_device": "Добавить устройство",
+  "search": "Поиск",
+  "search_for_devices":"Поиск устройств"
 }

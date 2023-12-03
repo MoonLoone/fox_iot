@@ -10,6 +10,4 @@ abstract class IBluetooth {
 
   Future<bool> sendDataToDevice(BlueDevice bluetoothDevice, String data);
 
-  Future<bool> receiveDataFromDevice(BlueDevice bluetoothDevice);
-
 }

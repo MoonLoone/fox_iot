@@ -12,5 +12,7 @@
   "navbar_devices": "Devices",
   "navbar_rules": "Rules",
   "navbar_account": "Account",
-  "add_device": "Add device"
+  "add_device": "Add device",
+  "search": "Search",
+  "search_for_devices":"Search for devices"
 }
