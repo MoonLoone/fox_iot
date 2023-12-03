@@ -4,6 +4,7 @@ import 'package:fox_iot/feature/devices/presentation/components/device_list_item
 import 'package:fox_iot/feature/devices/presentation/contracts/devices_actions.dart';
 import 'package:fox_iot/feature/devices/presentation/contracts/devices_state.dart';
 import 'package:fox_iot/feature/devices/presentation/devices_bloc.dart';
+import 'package:fox_iot/feature/hardware_adapters/bluetooth/presentation/bluetooth_devices_page.dart';
 import 'package:fox_iot/res/components/background.dart';
 import 'package:fox_iot/res/components/fox_iot_buttons.dart';
 import 'package:fox_iot/res/values/assets.dart';
@@ -56,7 +57,11 @@ class _DevicesPageState extends State<DevicesPage> {
                           height: 32,
                         ),
                         FoxIoTPrimaryButton(
-                            null, null, S.of(context).add_device, () => null)
+                            null,
+                            null,
+                            S.of(context).add_device,
+                            () => Navigator.pushNamed(
+                                context, BlueDevicesPage.navId))
                       ]),
                 ])),
             Expanded(

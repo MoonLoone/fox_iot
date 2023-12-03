@@ -3,7 +3,8 @@ import 'package:fox_iot/feature/hardware_adapters/bluetooth/domain/IBluetooth.da
 import 'package:fox_iot/feature/hardware_adapters/bluetooth/domain/models/bluetooth_device.dart';
 
 class BluetoothImpl extends IBluetooth {
-  final FlutterBlue _flutterBlue = FlutterBlue.instance;
+
+  late final FlutterBlue _flutterBlue = FlutterBlue.instance;
 
   @override
   Future<List<BlueDevice>> getAllBluetoothDevices() async {

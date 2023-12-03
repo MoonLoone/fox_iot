@@ -26,5 +26,7 @@ enum FoxIotAssetName {
   navbarDevicesUnselected,
   navbarRulesUnselected,
   hub,
-  bulb
+  bulb,
+  bluetooth,
+  errorSearch
 }

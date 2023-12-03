@@ -49,3 +49,5 @@ flutter:
     - lib/res/assets/undefined.png
     - lib/res/assets/hub.png
     - lib/res/assets/bulb.png
+    - lib/res/assets/error_search.png
+    - lib/res/assets/bluetooth.png

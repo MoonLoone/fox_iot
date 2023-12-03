@@ -2,5 +2,6 @@
 enum DeviceType{
   hub,
   bulb,
-  sensor
+  sensor,
+  undefined
 }

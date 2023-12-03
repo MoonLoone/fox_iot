@@ -6,10 +6,10 @@ class DeviceRepo extends IDeviceRepo {
   @override
   Future<List<Device>> getUserDevices() async {
     return [
-      Device("My Light Bulb", DeviceType.bulb),
-      Device("My Light Bulb2", DeviceType.bulb),
-      Device("My Hub", DeviceType.hub),
-      Device("My Thermal Sensor", DeviceType.sensor),
+      Device(name: "My Light Bulb", deviceType: DeviceType.bulb),
+      Device(name: "My Light Bulb2", deviceType: DeviceType.bulb),
+      Device(name: "My Hub", deviceType: DeviceType.hub),
+      Device(name: "My Thermal Sensor", deviceType: DeviceType.sensor),
     ];
   }
 }

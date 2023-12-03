@@ -61,5 +61,9 @@ class FoxIotTheme {
         FoxIoTAssets(url: "lib/res/assets/bulb.png", size: const Size(48, 48)),
     FoxIotAssetName.hub:
         FoxIoTAssets(url: "lib/res/assets/hub.png", size: const Size(48, 48)),
+    FoxIotAssetName.errorSearch: FoxIoTAssets(
+        url: "lib/res/assets/error_search.png", size: const Size(128, 128)),
+    FoxIotAssetName.bluetooth: FoxIoTAssets(
+        url: "lib/res/assets/bluetooth.png", size: const Size(128, 128)),
   };
 }

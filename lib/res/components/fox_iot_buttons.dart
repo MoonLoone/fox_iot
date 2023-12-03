@@ -9,17 +9,19 @@ class FoxIoTPrimaryButton extends StatelessWidget {
   final String? btnText;
   final Function() onClick;
 
-  const FoxIoTPrimaryButton(
-      this.leadingItem, this.trailingItem, this.btnText, this.onClick,
+  const FoxIoTPrimaryButton(this.leadingItem, this.trailingItem, this.btnText,
+      this.onClick,
       {super.key});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () {},
+        onPressed: () {
+          onClick();
+        },
         style: ButtonStyle(
             backgroundColor:
-                MaterialStateProperty.all(FoxIotTheme.colors.third),
+            MaterialStateProperty.all(FoxIotTheme.colors.third),
             padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(100)))),
