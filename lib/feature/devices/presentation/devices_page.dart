@@ -26,8 +26,7 @@ class _DevicesPageState extends State<DevicesPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DevicesBloc, DevicesState>(builder: (context, state) {
-      return Background(
-          child: Scaffold(
+      return Background(Scaffold(
         backgroundColor: Colors.amber.withOpacity(0),
         bottomNavigationBar: FoxNavbar(
           NavbarStates.devices,

@@ -15,7 +15,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Background(
-      child: Scaffold(
+      Scaffold(
         backgroundColor: Colors.amber.withOpacity(0),
         body: const WelcomeDialog(),
       ),
