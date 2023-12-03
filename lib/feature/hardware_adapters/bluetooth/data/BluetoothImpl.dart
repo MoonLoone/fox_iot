@@ -3,7 +3,6 @@ import 'package:fox_iot/feature/hardware_adapters/bluetooth/domain/IBluetooth.da
 import 'package:fox_iot/feature/hardware_adapters/bluetooth/domain/models/bluetooth_device.dart';
 
 class BluetoothImpl extends IBluetooth {
-
   late final FlutterBlue _flutterBlue = FlutterBlue.instance;
 
   @override
@@ -42,6 +41,8 @@ class BluetoothImpl extends IBluetooth {
   }
 
   List<BlueDevice> convertResultsToBlueDevices(List<ScanResult> results) {
-    return results.map((ScanResult result) => BlueDevice()).toList();
+    return results
+        .map((ScanResult result) => BlueDevice(name: result.device.name))
+        .toList();
   }
 }
