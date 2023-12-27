@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_iot/auth/presentation/sign_up_page/SignUpContracts.dart';
+import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpContracts.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../domain/IAuthRepo.dart';

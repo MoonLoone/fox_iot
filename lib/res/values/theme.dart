@@ -4,6 +4,7 @@ import 'package:fox_iot/res/values/colors.dart';
 import 'package:fox_iot/res/values/text_styles.dart';
 
 class FoxIotTheme {
+
   FoxIotTheme._init(BuildContext context) {}
 
   static final FoxIoTColors colors = FoxIoTColors(
@@ -27,15 +28,30 @@ class FoxIotTheme {
   );
 
   static final Map<FoxIotAssetName, FoxIoTAssets> assets = {
-    FoxIotAssetName.email: FoxIoTAssets(
-        url: "lib/res/assets/e_mail_icon.png", size: const Size(32, 32)),
-    FoxIotAssetName.passwordLock: FoxIoTAssets(
-        url: "lib/res/assets/lock_passw_icon.png", size: const Size(32, 32)),
-    FoxIotAssetName.person: FoxIoTAssets(
-        url: "lib/res/assets/person_icon.png", size: const Size(32, 32)),
-    FoxIotAssetName.visible: FoxIoTAssets(
-        url: "lib/res/assets/visible_icon.png", size: const Size(32, 32)),
-    FoxIotAssetName.facebook: FoxIoTAssets(
-        url: "lib/res/assets/icon_facebook.png", size: const Size(32, 32)),
-  };
-}
+  FoxIotAssetName.email: FoxIoTAssets(
+  url: "lib/res/assets/e_mail_icon.png", size: const Size(32, 32)),
+  FoxIotAssetName.passwordLock: FoxIoTAssets(
+  url: "lib/res/assets/lock_passw_icon.png", size: const Size(32, 32)),
+  FoxIotAssetName.person: FoxIoTAssets(
+  url: "lib/res/assets/person_icon.png", size: const Size(32, 32)),
+  FoxIotAssetName.visible: FoxIoTAssets(
+  url: "lib/res/assets/visible_icon.png", size: const Size(32, 32)),
+  FoxIotAssetName.facebook: FoxIoTAssets(
+  url: "lib/res/assets/icon_facebook.png", size: const Size(32, 32)),
+  FoxIotAssetName.navbarHomeSelected: FoxIoTAssets(
+  url: "lib/res/assets/home_s.png", size: const Size(32, 32)),
+    FoxIotAssetName.navbarAccountSelected: FoxIoTAssets(
+        url: "lib/res/assets/account_s.png", size: const Size(32, 32)),
+    FoxIotAssetName.navbarDevicesSelected: FoxIoTAssets(
+        url: "lib/res/assets/devices_s.png", size: const Size(32, 32)),
+    FoxIotAssetName.navbarRulesSelected: FoxIoTAssets(
+        url: "lib/res/assets/rules_s.png", size: const Size(32, 32)),
+    FoxIotAssetName.navbarHomeUnselected: FoxIoTAssets(
+        url: "lib/res/assets/home_un.png", size: const Size(32, 32)),
+    FoxIotAssetName.navbarAccountUnselected: FoxIoTAssets(
+        url: "lib/res/assets/account_un.png", size: const Size(32, 32)),
+    FoxIotAssetName.navbarDevicesUnselected: FoxIoTAssets(
+        url: "lib/res/assets/devices_un.png", size: const Size(32, 32)),
+    FoxIotAssetName.navbarRulesUnselected: FoxIoTAssets(
+        url: "lib/res/assets/rules_un.png", size: const Size(32, 32)),
+};}

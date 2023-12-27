@@ -7,5 +7,9 @@
   "nickname": "Никнейм",
   "forgot_password": "Забыли пароль?",
   "main_info": "Основная информация",
-  "next": "Далее"
+  "next": "Далее",
+  "navbar_home": "Дом",
+  "navbar_devices": "Устройства",
+  "navbar_rules": "Правила",
+  "navbar_account": "Аккаунт"
 }

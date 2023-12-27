@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fox_iot/res/components/background.dart';
-import 'package:fox_iot/welcome_page/pres/components/welcome_dialog.dart';
+import 'package:fox_iot/feature/welcome_page/pres/components/welcome_dialog.dart';
 
 class WelcomePage extends StatefulWidget {
 

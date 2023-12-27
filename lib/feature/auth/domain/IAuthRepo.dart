@@ -1,5 +1,5 @@
 
-import 'package:fox_iot/auth/domain/models/FoxIoTUser.dart';
+import 'package:fox_iot/feature/auth/domain/models/FoxIoTUser.dart';
 
 abstract class IAuthRepo {
 

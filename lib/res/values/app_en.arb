@@ -7,5 +7,9 @@
   "nickname": "Nickname",
   "forgot_password": "Forgot password?",
   "main_info": "Main Info",
-  "next": "Next"
+  "next": "Next",
+  "navbar_home": "Home",
+  "navbar_devices": "Devices",
+  "navbar_rules": "Rules",
+  "navbar_account": "Account"
 }
