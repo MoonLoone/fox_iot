@@ -1,4 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fox_iot/feature/account/account_page.dart';
+import 'package:fox_iot/feature/devices/presentation/devices_page.dart';
+import 'package:fox_iot/feature/home/home_page.dart';
+import 'package:fox_iot/feature/rules/rules_page.dart';
 import 'package:fox_iot/res/values/assets.dart';
 
 import '../../values/s.dart';
@@ -42,6 +46,19 @@ extension NavbarStatesAsset on NavbarStates {
         return S.of(context).navbar_rules;
       case NavbarStates.account:
         return S.of(context).navbar_account;
+    }
+  }
+
+  String getNavigationPath() {
+    switch (this) {
+      case NavbarStates.home:
+        return HomePage.navId;
+      case NavbarStates.devices:
+        return DevicesPage.navId;
+      case NavbarStates.rules:
+        return RulesPage.navId;
+      case NavbarStates.account:
+        return AccountPage.navId;
     }
   }
 }

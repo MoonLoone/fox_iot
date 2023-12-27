@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpContracts.dart';
+import 'package:fox_iot/feature/home/home_page.dart';
+import 'package:fox_iot/res/components/background.dart';
+import 'package:fox_iot/res/components/fox_iot_buttons.dart';
+import 'package:fox_iot/res/values/assets.dart';
+import 'package:fox_iot/res/values/theme.dart';
 
-import '../../../../../res/components/background.dart';
-import '../../../../../res/values/assets.dart';
-import '../../../../../res/values/s.dart';
-import '../../../../../res/values/theme.dart';
-import '../SignUpBloc.dart';
+import '../../../../res/values/s.dart';
+import 'SignInBloc.dart';
+import 'SignInContracts.dart';
 
-class SignUpPage extends StatefulWidget {
-  static const String navId = "sign_up_page";
+class SignInPage extends StatefulWidget {
+  static const String navId = "sign_in_page";
 
   @override
-  State<StatefulWidget> createState() => SignUpPageState();
+  State<StatefulWidget> createState() => SignInPageState();
 }
 
-class SignUpPageState extends State<SignUpPage> {
+class SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpBloc, SignUpState>(builder: (context, state) {
+    return BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
       final loading = state.loadingState;
       final isPasswordVisible = state.isPasswordVisible;
-      final bloc = BlocProvider.of<SignUpBloc>(context);
+      final SignInBloc signInBloc = BlocProvider.of<SignInBloc>(context);
       return Background(Scaffold(
           backgroundColor: Colors.amber.withOpacity(0),
           body: Stack(children: [
@@ -62,24 +64,6 @@ class SignUpPageState extends State<SignUpPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Text(
-                            S.of(context).main_info,
-                            style: FoxIotTheme.textStyles.primary,
-                          ),
-                          TextField(
-                            controller: state.nicknameController,
-                            style: FoxIotTheme.textStyles.primary,
-                            decoration: InputDecoration(
-                              fillColor: FoxIotTheme.colors.secondary,
-                              prefixIcon: Image.asset(FoxIotTheme
-                                  .assets[FoxIotAssetName.person]!.url),
-                              hintText: S.of(context).nickname,
-                              filled: true,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 24,
-                          ),
                           TextField(
                             controller: state.emailController,
                             style: FoxIotTheme.textStyles.primary,
@@ -106,7 +90,9 @@ class SignUpPageState extends State<SignUpPage> {
                                   alignment: Alignment.center,
                                   icon: Image.asset(FoxIotTheme
                                       .assets[FoxIotAssetName.visible]!.url),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    signInBloc.add(VisibleIconClick());
+                                  },
                                 ),
                                 hintText: S.of(context).password,
                                 filled: true),
@@ -114,45 +100,24 @@ class SignUpPageState extends State<SignUpPage> {
                           const SizedBox(
                             height: 24,
                           ),
-                          TextField(
-                            controller: state.rPasswordController,
-                            textAlignVertical: TextAlignVertical.center,
+                          FoxIoTPrimaryButton(
+                              null,
+                              null,
+                              S.of(context).signIn,
+                              () => signInBloc.add(SignInClick(
+                                  email: state.emailController.text,
+                                  password: state.passwordController.text,
+                                  navigateWhenAuth: () {
+                                    Navigator.pushNamed(
+                                        context, HomePage.navId);
+                                  }))),
+                          const SizedBox(
+                            height: 32,
+                          ),
+                          Text(
+                            S.of(context).forgot_password,
                             style: FoxIotTheme.textStyles.primary,
-                            decoration: InputDecoration(
-                                fillColor: FoxIotTheme.colors.secondary,
-                                prefixIcon: Image.asset(FoxIotTheme
-                                    .assets[FoxIotAssetName.passwordLock]!.url),
-                                suffixIcon: IconButton(
-                                  alignment: Alignment.center,
-                                  icon: Image.asset(FoxIotTheme
-                                      .assets[FoxIotAssetName.visible]!.url),
-                                  onPressed: () {},
-                                ),
-                                hintText: S.of(context).password,
-                                filled: true),
-                          ),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              bloc.add(NextButtonClick());
-                            },
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    FoxIotTheme.colors.third),
-                                padding: MaterialStateProperty.all(
-                                    const EdgeInsets.all(20)),
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100)))),
-                            child: Text(
-                              S.of(context).next,
-                              style: FoxIotTheme.textStyles.primary
-                                  .copyWith(color: FoxIotTheme.colors.onThird),
-                            ),
-                          ),
+                          )
                         ],
                       ))),
             ))

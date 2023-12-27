@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-import '../models/LoadingState.dart';
+import '../../../../utils/models/LoadingState.dart';
+
 
 @immutable
 class SignUpState {

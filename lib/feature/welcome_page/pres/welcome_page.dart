@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fox_iot/res/components/background.dart';
 import 'package:fox_iot/feature/welcome_page/pres/components/welcome_dialog.dart';
+import 'package:fox_iot/res/components/background.dart';
+import 'package:get_it/get_it.dart';
+
+import '../../auth/domain/IAuthRepo.dart';
 
 class WelcomePage extends StatefulWidget {
-
   static const String navId = "welcome_page";
 
   const WelcomePage({super.key});
@@ -13,13 +15,19 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+
   @override
   Widget build(BuildContext context) {
     return Background(
-      child: Scaffold(
+      Scaffold(
         backgroundColor: Colors.amber.withOpacity(0),
-        body: WelcomeDialog(),
+        body: const WelcomeDialog(),
       ),
     );
+  }
+
+  @override
+  void initState() {
+
   }
 }
