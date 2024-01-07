@@ -4,14 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fox_iot/di/Singleton.dart';
+import 'package:fox_iot/feature/account/account_page.dart';
 import 'package:fox_iot/feature/auth/domain/models/FoxIoTUser.dart';
 import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpBloc.dart';
-import 'package:fox_iot/feature/account/account_page.dart';
-import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpBloc.dart';
-import 'package:fox_iot/feature/devices/presentation/devices_bloc.dart';
-import 'package:fox_iot/feature/devices/presentation/devices_page.dart';
-import 'package:fox_iot/feature/hardware_adapters/bluetooth/presentation/bluetooth_devices_bloc.dart';
-import 'package:fox_iot/feature/hardware_adapters/bluetooth/presentation/bluetooth_devices_page.dart';
 import 'package:fox_iot/feature/home/home_page.dart';
 import 'package:fox_iot/feature/rules/rules_page.dart';
 import 'package:fox_iot/feature/welcome_page/pres/welcome_page.dart';
@@ -67,24 +62,6 @@ class FoxIoTApp extends StatelessWidget {
   Widget _getStartWidget() {
     if (currentUser == null) return const WelcomePage();
     //TODO navigate to main page
-    return BlocProvider(
-      create: (context) => SignUpBloc(),
-      child: SignUpPage(),
-              create: (context) => SignUpBloc(),
-              lazy: true,
-              child: SignUpPage(),
-            ),
-        DevicesPage.navId: (context) => BlocProvider(
-              create: (context) => DevicesBloc(),
-              lazy: true,
-              child: const DevicesPage(),
-            ),
-        BlueDevicesPage.navId: (context) => BlocProvider(
-              create: (context) => BluetoothDevicesBloc(),
-              lazy: true,
-              child: const BlueDevicesPage(),
-            ),
-      },
-    );
+    return BlocProvider(create: (context) => SignUpBloc(), child: SignUpPage());
   }
 }

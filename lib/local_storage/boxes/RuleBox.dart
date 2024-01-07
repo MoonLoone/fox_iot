@@ -1,13 +1,8 @@
-
+import 'package:fox_iot/local_storage/models/Rule.dart';
 import 'package:hive/hive.dart';
 
-import '../../feature/auth/domain/models/FoxIoTUser.dart';
+class RuleBox {
+  static const String _ruleBoxName = 'rule_box';
 
-class FoxUserBox{
-
-  static const String _userBoxName = 'user_box';
-  static const String currentUser = 'current_user';
-
-  Future<Box<FoxIoTUser>> box = Hive.openBox(_userBoxName);
-
+  Future<Box<Rule>> box = Hive.openBox(_ruleBoxName);
 }
