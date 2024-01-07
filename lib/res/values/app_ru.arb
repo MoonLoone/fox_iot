@@ -1,6 +1,6 @@
 {
-  "signIn": "Зарегестрироваться",
-  "signUp": "Войти",
+  "signIn": "Войти",
+  "signUp": "Зарегестрироваться",
   "connect_using": "Войти с помощью",
   "e_mail": "E_mail",
   "password": "Пароль",
@@ -11,5 +11,8 @@
   "navbar_home": "Дом",
   "navbar_devices": "Устройства",
   "navbar_rules": "Правила",
-  "navbar_account": "Аккаунт"
+  "navbar_account": "Аккаунт",
+  "add_device": "Добавить устройство",
+  "search": "Поиск",
+  "search_for_devices":"Поиск устройств"
 }

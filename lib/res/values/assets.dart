@@ -10,11 +10,13 @@ class FoxIoTAssets {
 }
 
 enum FoxIotAssetName {
+  undefined,
   email,
   passwordLock,
   person,
   visible,
   facebook,
+  addDevice,
   navbarHomeSelected,
   navbarAccountSelected,
   navbarDevicesSelected,
@@ -22,5 +24,9 @@ enum FoxIotAssetName {
   navbarHomeUnselected,
   navbarAccountUnselected,
   navbarDevicesUnselected,
-  navbarRulesUnselected
+  navbarRulesUnselected,
+  hub,
+  bulb,
+  bluetooth,
+  errorSearch
 }
