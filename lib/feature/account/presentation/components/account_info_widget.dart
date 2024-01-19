@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:fox_iot/feature/account/domain/models/AccountUserInfo.dart';
 import 'package:fox_iot/feature/account/presentation/components/account_info_line.dart';
 
@@ -10,8 +10,10 @@ import '../../../../utils/AssetsManipulations.dart';
 class AccountInfoWidget extends StatelessWidget {
   final AccountUserInfo _accountUserInfo;
   final BoxConstraints _parentConstraints;
+  final Function onAccountImageClick;
 
-  const AccountInfoWidget(this._accountUserInfo, this._parentConstraints,
+  const AccountInfoWidget(
+      this._accountUserInfo, this._parentConstraints, this.onAccountImageClick,
       {super.key});
 
   @override
@@ -36,14 +38,17 @@ class AccountInfoWidget extends StatelessWidget {
               SizedBox(
                 height: _parentConstraints.maxHeight * 0.07,
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.asset(
-                  safetyGetAsset(FoxIotAssetName.addDevice).url,
-                  width: 160,
-                  height: 160,
-                  alignment: Alignment.center,
-                  fit: BoxFit.fill,
+              InkWell(
+                onTap: onAccountImageClick(),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.asset(
+                    safetyGetAsset(FoxIotAssetName.addDevice).url,
+                    width: 160,
+                    height: 160,
+                    alignment: Alignment.center,
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
               Text(

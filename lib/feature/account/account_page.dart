@@ -45,7 +45,9 @@ class _AccountPageState extends State<AccountPage> {
             return Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                AccountInfoWidget(state.accountUserInfo, constraints),
+                AccountInfoWidget(state.accountUserInfo, constraints, () {
+                  bloc.add(OnAccountImageClick());
+                }),
                 Padding(
                   padding: const EdgeInsets.only(right: 16, left: 16),
                   child: Divider(
