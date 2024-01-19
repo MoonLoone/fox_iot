@@ -14,5 +14,11 @@
   "navbar_account": "Account",
   "add_device": "Add device",
   "search": "Search",
-  "search_for_devices":"Search for devices"
+  "search_for_devices":"Search for devices",
+  "family_members": "Family members",
+  "active_devices": "Active devices",
+  "settings": "Settings",
+  "family": "Family Details",
+  "support": "Support",
+  "exit": "Exit"
 }

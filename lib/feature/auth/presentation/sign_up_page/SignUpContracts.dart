@@ -22,7 +22,7 @@ class SignUpState {
       this.email = "",
       this.password = "",
       this.isPasswordVisible = false,
-      this.loadingState = LoadingState.notLoading,
+      this.loadingState = const NotLoading(),
       this.isRPasswordVisible = false,
       this.rPassword = ""});
 

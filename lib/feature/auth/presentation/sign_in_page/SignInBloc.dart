@@ -12,7 +12,7 @@ class SignInBloc extends Bloc<SignInActions, SignInState> {
         emit(state.updateState(isPasswordVisible: !state.isPasswordVisible));
       }
       if (event is SignInClick) {
-        emit(state.updateState(loadingState: LoadingState.loading));
+        emit(state.updateState(loadingState: Loading()));
         if (event.email == null || event.password == null) return;
         await authRepo
             .authorize(event.email!, event.password!)

@@ -1,2 +1,17 @@
+abstract class LoadingState {
+  const LoadingState();
+}
 
-enum LoadingState { loading, notLoading, error }
+class Loading extends LoadingState {
+  const Loading();
+}
+
+class LoadingError extends LoadingState {
+  final String message;
+
+  LoadingError(this.message);
+}
+
+class NotLoading extends LoadingState{
+  const NotLoading();
+}

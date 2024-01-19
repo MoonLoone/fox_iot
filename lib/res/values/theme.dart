@@ -1,10 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fox_iot/res/values/assets.dart';
 import 'package:fox_iot/res/values/colors.dart';
+import 'package:fox_iot/res/values/sizes.dart';
 import 'package:fox_iot/res/values/text_styles.dart';
 
 class FoxIotTheme {
   FoxIotTheme._init(BuildContext context) {}
+
+  static const _BASE_ASSET_DIR = "lib/res/assets/";
+
+  static const FoxIoTSizes sizes = FoxIoTSizes(
+      primaryIconSize: Size(32.0, 32.0), secondaryIconSize: Size(24.0, 24.0));
 
   static final FoxIoTColors colors = FoxIoTColors(
     primary: const Color(0xFFfcd383),
@@ -26,44 +32,60 @@ class FoxIotTheme {
     h4: TextStyle(fontSize: 24, color: colors.textPrimary),
   );
 
-  static final Map<FoxIotAssetName, FoxIoTAssets> assets = {
-    FoxIotAssetName.undefined: FoxIoTAssets(
-        url: "lib/res/assets/undefined.png", size: const Size(32, 32)),
-    FoxIotAssetName.email: FoxIoTAssets(
-        url: "lib/res/assets/e_mail_icon.png", size: const Size(32, 32)),
-    FoxIotAssetName.passwordLock: FoxIoTAssets(
-        url: "lib/res/assets/lock_passw_icon.png", size: const Size(32, 32)),
-    FoxIotAssetName.person: FoxIoTAssets(
-        url: "lib/res/assets/person_icon.png", size: const Size(32, 32)),
-    FoxIotAssetName.visible: FoxIoTAssets(
-        url: "lib/res/assets/visible_icon.png", size: const Size(32, 32)),
-    FoxIotAssetName.facebook: FoxIoTAssets(
-        url: "lib/res/assets/icon_facebook.png", size: const Size(32, 32)),
-    FoxIotAssetName.navbarHomeSelected: FoxIoTAssets(
-        url: "lib/res/assets/home_s.png", size: const Size(32, 32)),
-    FoxIotAssetName.navbarAccountSelected: FoxIoTAssets(
-        url: "lib/res/assets/account_s.png", size: const Size(32, 32)),
-    FoxIotAssetName.navbarDevicesSelected: FoxIoTAssets(
-        url: "lib/res/assets/devices_s.png", size: const Size(32, 32)),
-    FoxIotAssetName.navbarRulesSelected: FoxIoTAssets(
-        url: "lib/res/assets/rules_s.png", size: const Size(32, 32)),
-    FoxIotAssetName.navbarHomeUnselected: FoxIoTAssets(
-        url: "lib/res/assets/home_un.png", size: const Size(32, 32)),
-    FoxIotAssetName.navbarAccountUnselected: FoxIoTAssets(
-        url: "lib/res/assets/account_un.png", size: const Size(32, 32)),
-    FoxIotAssetName.navbarDevicesUnselected: FoxIoTAssets(
-        url: "lib/res/assets/devices_un.png", size: const Size(32, 32)),
-    FoxIotAssetName.navbarRulesUnselected: FoxIoTAssets(
-        url: "lib/res/assets/rules_un.png", size: const Size(32, 32)),
-    FoxIotAssetName.addDevice: FoxIoTAssets(
-        url: "lib/res/assets/add_device.png", size: const Size(32, 32)),
+  static final Map<FoxIotAssetName, FoxIoTAsset> assets = {
+    FoxIotAssetName.undefined: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}undefined.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.email: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}e_mail_icon.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.passwordLock: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}lock_passw_icon.png",
+        size: sizes.primaryIconSize),
+    FoxIotAssetName.person: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}person_icon.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.visible: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}visible_icon.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.facebook: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}icon_facebook.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.navbarHomeSelected: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}home_s.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.navbarAccountSelected: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}account_s.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.navbarDevicesSelected: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}devices_s.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.navbarRulesSelected: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}rules_s.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.navbarHomeUnselected: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}home_un.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.navbarAccountUnselected: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}account_un.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.navbarDevicesUnselected: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}devices_un.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.navbarRulesUnselected: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}rules_un.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.addDevice: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}add_device.png", size: sizes.primaryIconSize),
     FoxIotAssetName.bulb:
-        FoxIoTAssets(url: "lib/res/assets/bulb.png", size: const Size(48, 48)),
+        FoxIoTAsset(url: "${_BASE_ASSET_DIR}bulb.png", size: const Size(48, 48)),
     FoxIotAssetName.hub:
-        FoxIoTAssets(url: "lib/res/assets/hub.png", size: const Size(48, 48)),
-    FoxIotAssetName.errorSearch: FoxIoTAssets(
-        url: "lib/res/assets/error_search.png", size: const Size(128, 128)),
-    FoxIotAssetName.bluetooth: FoxIoTAssets(
-        url: "lib/res/assets/bluetooth.png", size: const Size(128, 128)),
+        FoxIoTAsset(url: "${_BASE_ASSET_DIR}hub.png", size: const Size(48, 48)),
+    FoxIotAssetName.errorSearch: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}error_search.png", size: const Size(128, 128)),
+    FoxIotAssetName.bluetooth: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}bluetooth.png", size: const Size(128, 128)),
+    FoxIotAssetName.settings: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}settings.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.family: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}family.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.support: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}support.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.exit: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}exit.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.familyMembers: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}family_members.png", size: sizes.secondaryIconSize),
+    FoxIotAssetName.activeDevices: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}active_devices.png", size: sizes.secondaryIconSize),
+    FoxIotAssetName.nextArrow: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}next_arrow.png", size: sizes.primaryIconSize),
   };
+
 }

@@ -8,8 +8,7 @@ class DevicesState {
   final LoadingState loadingState;
   final List<Device> devices;
 
-  const DevicesState(
-      {this.loadingState = LoadingState.notLoading, this.devices = const []});
+  const DevicesState({this.loadingState = const NotLoading(), this.devices = const []});
 
   DevicesState updateState(
       {LoadingState? loadingState, List<Device>? devices}) {
@@ -18,4 +17,3 @@ class DevicesState {
         devices: devices ?? this.devices);
   }
 }
-
