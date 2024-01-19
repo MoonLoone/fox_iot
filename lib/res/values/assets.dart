@@ -2,11 +2,17 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 
-class FoxIoTAssets {
+class FoxIoTAsset {
   final String url;
   final Size size;
 
-  FoxIoTAssets({required this.url, required this.size});
+  FoxIoTAsset({required this.url, required this.size});
+}
+
+class UndefinedAsset extends FoxIoTAsset {
+  UndefinedAsset(
+      {super.url = "lib/res/assets/undefined.png",
+      super.size = const Size(24, 24)});
 }
 
 enum FoxIotAssetName {
@@ -28,5 +34,11 @@ enum FoxIotAssetName {
   hub,
   bulb,
   bluetooth,
-  errorSearch
+  errorSearch,
+  settings,
+  family,
+  support,
+  exit,
+  activeDevices,
+  familyMembers
 }

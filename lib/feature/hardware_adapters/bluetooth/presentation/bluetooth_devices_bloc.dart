@@ -9,11 +9,11 @@ class BluetoothDevicesBloc
     extends Bloc<BluetoothDevicesActions, BluetoothDevicesState> {
   BluetoothDevicesBloc() : super(const BluetoothDevicesState()) {
     on((event, emit) async {
-      emit(state.updateState(loadingState: LoadingState.loading));
+      emit(state.updateState(loadingState: const Loading()));
       if (event is ScanBluetoothDevices) {
         await _bluetooth.getAllBluetoothDevices().then((value) => emit(
             state.updateState(
-                blueDevices: value, loadingState: LoadingState.notLoading)));
+                blueDevices: value, loadingState: const NotLoading())));
       }
     });
   }

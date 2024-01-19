@@ -11,7 +11,7 @@ class DeviceListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FoxIoTAssets image = FoxIotTheme.assets[deviceItem.getDeviceAssetName()] ??
+    FoxIoTAsset image = FoxIotTheme.assets[deviceItem.getDeviceAssetName()] ??
         FoxIotTheme.assets.values.first;
     return FractionallySizedBox(
         widthFactor: 1,

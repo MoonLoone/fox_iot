@@ -15,7 +15,7 @@ class SignInState {
   SignInState({this.email = "",
     this.password = "",
     this.isPasswordVisible = false,
-    this.loadingState = LoadingState.notLoading,
+    this.loadingState = const NotLoading(),
     this.isAuthorized = false});
 
   SignInState updateState({String? email,

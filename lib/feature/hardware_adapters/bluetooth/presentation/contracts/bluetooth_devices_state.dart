@@ -9,7 +9,7 @@ class BluetoothDevicesState {
   final LoadingState loadingState;
 
   const BluetoothDevicesState(
-      {this.blueDevices = const [], this.loadingState = LoadingState.loading});
+      {this.blueDevices = const [], this.loadingState = const Loading()});
 
   BluetoothDevicesState updateState({
     List<BlueDevice>? blueDevices,

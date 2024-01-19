@@ -6,21 +6,22 @@ import 'package:fox_iot/utils/models/LoadingState.dart';
 class LoadingPlaceholder extends StatelessWidget {
   final LoadingState loadingsState;
 
-  const LoadingPlaceholder({super.key, this.loadingsState = LoadingState.loading});
+  const LoadingPlaceholder(
+      {super.key, this.loadingsState = const NotLoading()});
 
   @override
   Widget build(BuildContext context) {
     Widget? placeHolderWidget;
     switch (loadingsState) {
-      case LoadingState.loading:
+      case Loading():
         placeHolderWidget = CircularProgressIndicator(
           color: FoxIotTheme.colors.primary,
         );
-      case LoadingState.notLoading:
+      case NotLoading():
         placeHolderWidget = Image.asset(
             FoxIotTheme.assets[FoxIotAssetName.bluetooth]?.url ??
                 FoxIotTheme.assets.values.first.url);
-      case LoadingState.error:
+      case LoadingError():
         placeHolderWidget = Image.asset(
             FoxIotTheme.assets[FoxIotAssetName.errorSearch]?.url ??
                 FoxIotTheme.assets.values.first.url);

@@ -51,3 +51,9 @@ flutter:
     - lib/res/assets/bulb.png
     - lib/res/assets/error_search.png
     - lib/res/assets/bluetooth.png
+    - lib/res/assets/active_devices.png
+    - lib/res/assets/family_members.png
+    - lib/res/assets/settings.png
+    - lib/res/assets/support.png
+    - lib/res/assets/exit.png
+    - lib/res/assets/family.png
