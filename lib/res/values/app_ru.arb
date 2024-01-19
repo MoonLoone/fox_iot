@@ -14,5 +14,11 @@
   "navbar_account": "Аккаунт",
   "add_device": "Добавить устройство",
   "search": "Поиск",
-  "search_for_devices":"Поиск устройств"
+  "search_for_devices":"Поиск устройств",
+  "family_members": "Члены семьи",
+  "active_devices": "Активные устройства",
+  "settings": "Настройки",
+  "family": "Семья",
+  "support": "Поддержка",
+  "exit": "Выйти"
 }

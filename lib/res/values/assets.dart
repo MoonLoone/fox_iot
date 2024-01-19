@@ -40,5 +40,6 @@ enum FoxIotAssetName {
   support,
   exit,
   activeDevices,
-  familyMembers
+  familyMembers,
+  nextArrow
 }
