@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fox_iot/feature/account/presentation/account_bloc.dart';
-import 'package:fox_iot/feature/account/presentation/components/account_page_line.dart';
 import 'package:fox_iot/feature/account/presentation/components/account_info_widget.dart';
+import 'package:fox_iot/feature/account/presentation/components/account_page_line.dart';
+import 'package:fox_iot/feature/account/presentation/contracts/account_actions.dart';
 import 'package:fox_iot/feature/account/presentation/contracts/account_state.dart';
 import 'package:fox_iot/utils/AssetsManipulations.dart';
 
@@ -23,6 +24,7 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<AccountBloc>(context);
     FoxIoTAsset settingsAsset = safetyGetAsset(FoxIotAssetName.settings);
     FoxIoTAsset familyAsset = safetyGetAsset(FoxIotAssetName.family);
     FoxIoTAsset supportAsset = safetyGetAsset(FoxIotAssetName.support);
@@ -57,6 +59,9 @@ class _AccountPageState extends State<AccountPage> {
                   children: [
                     AccountPageLine(
                         text: S.of(context).settings,
+                        onClickFunction: () {
+                          bloc.add(OnSettingsClick());
+                        },
                         leadingImg: Image.asset(
                           settingsAsset.url,
                           width: settingsAsset.size.width,
@@ -65,6 +70,9 @@ class _AccountPageState extends State<AccountPage> {
                         finalImg: nextArrow),
                     AccountPageLine(
                         text: S.of(context).family,
+                        onClickFunction: () {
+                          bloc.add(OnFamilyClick());
+                        },
                         leadingImg: Image.asset(
                           familyAsset.url,
                           width: familyAsset.size.width,
@@ -73,6 +81,9 @@ class _AccountPageState extends State<AccountPage> {
                         finalImg: nextArrow),
                     AccountPageLine(
                         text: S.of(context).support,
+                        onClickFunction: () {
+                          bloc.add(OnSupportClick());
+                        },
                         leadingImg: Image.asset(
                           supportAsset.url,
                           width: supportAsset.size.width,
@@ -81,6 +92,9 @@ class _AccountPageState extends State<AccountPage> {
                         finalImg: nextArrow),
                     AccountPageLine(
                         text: S.of(context).exit,
+                        onClickFunction: () {
+                          bloc.add(OnExitClick());
+                        },
                         leadingImg: Image.asset(
                           exitAsset.url,
                           width: exitAsset.size.width,
