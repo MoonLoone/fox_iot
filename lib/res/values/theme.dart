@@ -45,7 +45,8 @@ class FoxIotTheme {
     FoxIotAssetName.visible: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}visible_icon.png", size: sizes.primaryIconSize),
     FoxIotAssetName.facebook: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}icon_facebook.png", size: sizes.primaryIconSize),
+        url: "${_BASE_ASSET_DIR}icon_facebook.png",
+        size: sizes.primaryIconSize),
     FoxIotAssetName.navbarHomeSelected: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}home_s.png", size: sizes.primaryIconSize),
     FoxIotAssetName.navbarAccountSelected: FoxIoTAsset(
@@ -64,8 +65,8 @@ class FoxIotTheme {
         url: "${_BASE_ASSET_DIR}rules_un.png", size: sizes.primaryIconSize),
     FoxIotAssetName.addDevice: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}add_device.png", size: sizes.primaryIconSize),
-    FoxIotAssetName.bulb:
-        FoxIoTAsset(url: "${_BASE_ASSET_DIR}bulb.png", size: const Size(48, 48)),
+    FoxIotAssetName.bulb: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}bulb.png", size: const Size(48, 48)),
     FoxIotAssetName.hub:
         FoxIoTAsset(url: "${_BASE_ASSET_DIR}hub.png", size: const Size(48, 48)),
     FoxIotAssetName.errorSearch: FoxIoTAsset(
@@ -81,11 +82,16 @@ class FoxIotTheme {
     FoxIotAssetName.exit: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}exit.png", size: sizes.primaryIconSize),
     FoxIotAssetName.familyMembers: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}family_members.png", size: sizes.secondaryIconSize),
+        url: "${_BASE_ASSET_DIR}family_members.png",
+        size: sizes.secondaryIconSize),
     FoxIotAssetName.activeDevices: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}active_devices.png", size: sizes.secondaryIconSize),
+        url: "${_BASE_ASSET_DIR}active_devices.png",
+        size: sizes.secondaryIconSize),
     FoxIotAssetName.nextArrow: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}next_arrow.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.changePencil: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}change_pencil.png", size: const Size(40.0, 40.0)),
+    FoxIotAssetName.confirm: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}confirm.png", size: sizes.primaryIconSize),
   };
-
 }

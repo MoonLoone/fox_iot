@@ -58,3 +58,5 @@ flutter:
     - lib/res/assets/exit.png
     - lib/res/assets/family.png
     - lib/res/assets/next_arrow.png
+    - lib/res/assets/change_pencil.png
+    - lib/res/assets/confirm.png
