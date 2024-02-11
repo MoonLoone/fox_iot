@@ -1,6 +1,8 @@
-class FoxIoTUser {
+import 'package:hive/hive.dart';
+
+class AuthUserDTO {
   final String name;
   final String email;
 
-  FoxIoTUser({required this.name, required this.email});
+  AuthUserDTO({required this.name, required this.email});
 }

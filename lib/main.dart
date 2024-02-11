@@ -10,22 +10,25 @@ import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpBloc.dart';
 import 'package:fox_iot/feature/home/home_page.dart';
 import 'package:fox_iot/feature/rules/rules_page.dart';
 import 'package:fox_iot/feature/welcome_page/pres/welcome_page.dart';
+import 'package:fox_iot/local_storage/hive/BoxesStorage.dart';
+import 'package:fox_iot/local_storage/models/FoxIoTUser.dart';
 import 'package:fox_iot/res/values/s.dart';
+import 'package:hive/hive.dart';
 
 import 'feature/auth/presentation/sign_in_page/SignInBloc.dart';
 import 'feature/auth/presentation/sign_in_page/SignInPage.dart';
 import 'feature/auth/presentation/sign_up_page/pres/SignUpPage.dart';
 import 'firebase_options.dart';
-import 'local_storage/boxes/FoxUserBox.dart';
 import 'local_storage/hive/initialization.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DartPluginRegistrant.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  initializeLocalStorage();
+  await initializeLocalStorage();
   registerSingletons();
-  FoxIoTUser? user = (await FoxUserBox().box).get(FoxUserBox.currentUser);
+  FoxIoTUser? user = (await Hive.openBox(BoxesStorage.userBoxName))
+      .get(BoxesStorage.currentUser);
   runApp(FoxIoTApp(currentUser: user));
 }
 
