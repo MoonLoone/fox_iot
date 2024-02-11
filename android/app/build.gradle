@@ -45,10 +45,21 @@ android {
         applicationId "com.example.fox_iot"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+    }
+
+    packagingOptions {
+        pickFirst 'lib/*/libc++_shared.so' // An Android Archive (AAR) file contains an Android library. If the .so file exists in multiple AAR files, select the first AAR file.
+    }
+
+    configurations.all {
+        exclude group: "com.thingclips.smart" ,module: 'thingsmart-modularCampAnno'
     }
 
     buildTypes {
@@ -64,4 +75,13 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    implementation 'com.alibaba:fastjson:1.1.67.android'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.14.9'
+    // The latest stable App SDK for Android.
+    implementation 'com.facebook.soloader:soloader:0.10.4+'
+    implementation 'com.thingclips.smart:thingsmart:5.8.1'
+
+    
+}
