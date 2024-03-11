@@ -15,7 +15,7 @@ class SignInBloc extends Bloc<SignInActions, SignInState> {
         emit(state.updateState(loadingState: LoadingState.loading));
         if (event.email == null || event.password == null) return;
         await authRepo
-            .authorize(event.email!, event.password!)
+            .authorizeWithEmail(event.email!, event.password!)
             .then((value) => event.navigateWhenAuth!());
       }
       if (event is ForgotPasswordClick) {

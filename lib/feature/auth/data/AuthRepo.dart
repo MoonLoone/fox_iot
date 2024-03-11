@@ -19,9 +19,15 @@ class AuthRepo extends IAuthRepo {
   }
 
   @override
-  Future<AuthUserDTO> authorize(String email, String password) async {
+  Future<AuthUserDTO> authorizeWithEmail(String email, String password) async {
     return (await _firebaseAuth
             .signInWithEmailAndPassword(email: email, password: password))
             .toDomainModel();
   }
+
+  @override
+  Future<AuthUserDTO> authorizeWithGoogle() async {
+    return AuthUserDTO(name: '', email: '');
+  }
+
 }

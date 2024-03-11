@@ -5,6 +5,8 @@ abstract class IAuthRepo {
 
   Future<AuthUserDTO> createUser(String email, String password);
 
-  Future<AuthUserDTO> authorize(String email, String password);
+  Future<AuthUserDTO> authorizeWithEmail(String email, String password);
+
+  Future<AuthUserDTO> authorizeWithGoogle();
 
 }
