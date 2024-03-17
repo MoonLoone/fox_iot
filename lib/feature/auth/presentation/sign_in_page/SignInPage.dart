@@ -18,6 +18,10 @@ class SignInPage extends StatefulWidget {
 }
 
 class SignInPageState extends State<SignInPage> {
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
@@ -65,7 +69,7 @@ class SignInPageState extends State<SignInPage> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           TextField(
-                            controller: state.emailController,
+                            controller: emailController,
                             style: FoxIotTheme.textStyles.primary,
                             decoration: InputDecoration(
                               fillColor: FoxIotTheme.colors.secondary,
@@ -79,7 +83,7 @@ class SignInPageState extends State<SignInPage> {
                             height: 24,
                           ),
                           TextField(
-                            controller: state.passwordController,
+                            controller: passwordController,
                             textAlignVertical: TextAlignVertical.center,
                             style: FoxIotTheme.textStyles.primary,
                             decoration: InputDecoration(
@@ -105,8 +109,8 @@ class SignInPageState extends State<SignInPage> {
                               null,
                               S.of(context).signIn,
                               () => signInBloc.add(SignInClick(
-                                  email: state.emailController.text,
-                                  password: state.passwordController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text,
                                   navigateWhenAuth: () {
                                     Navigator.pushNamed(
                                         context, HomePage.navId);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpContracts.dart';
+import 'package:fox_iot/feature/home/home_page.dart';
 
 import '../../../../../res/components/background.dart';
 import '../../../../../res/values/assets.dart';
@@ -16,6 +17,11 @@ class SignUpPage extends StatefulWidget {
 }
 
 class SignUpPageState extends State<SignUpPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordCheckController = TextEditingController();
+  final TextEditingController nicknameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpBloc, SignUpState>(builder: (context, state) {
@@ -67,7 +73,7 @@ class SignUpPageState extends State<SignUpPage> {
                             style: FoxIotTheme.textStyles.primary,
                           ),
                           TextField(
-                            controller: state.nicknameController,
+                            controller: nicknameController,
                             style: FoxIotTheme.textStyles.primary,
                             decoration: InputDecoration(
                               fillColor: FoxIotTheme.colors.secondary,
@@ -81,7 +87,7 @@ class SignUpPageState extends State<SignUpPage> {
                             height: 24,
                           ),
                           TextField(
-                            controller: state.emailController,
+                            controller: emailController,
                             style: FoxIotTheme.textStyles.primary,
                             decoration: InputDecoration(
                               fillColor: FoxIotTheme.colors.secondary,
@@ -95,7 +101,7 @@ class SignUpPageState extends State<SignUpPage> {
                             height: 24,
                           ),
                           TextField(
-                            controller: state.passwordController,
+                            controller: passwordController,
                             textAlignVertical: TextAlignVertical.center,
                             style: FoxIotTheme.textStyles.primary,
                             decoration: InputDecoration(
@@ -115,7 +121,7 @@ class SignUpPageState extends State<SignUpPage> {
                             height: 24,
                           ),
                           TextField(
-                            controller: state.rPasswordController,
+                            controller: passwordCheckController,
                             textAlignVertical: TextAlignVertical.center,
                             style: FoxIotTheme.textStyles.primary,
                             decoration: InputDecoration(
@@ -136,7 +142,12 @@ class SignUpPageState extends State<SignUpPage> {
                           ),
                           TextButton(
                             onPressed: () {
-                              bloc.add(NextButtonClick());
+                              bloc.add(NextButtonClick(
+                                  () => Navigator.pushNamed(
+                                      context, HomePage.navId),
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  passwordCheck: passwordCheckController.text));
                             },
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(

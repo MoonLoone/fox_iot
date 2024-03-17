@@ -15,14 +15,18 @@ class SignUpBloc extends Bloc<SignUpActions, SignUpState> {
         emit(state.updateState(isRPasswordVisible: !state.isRPasswordVisible));
       }
       if (event is NextButtonClick) {
-        emit(state.updateState(loadingState: LoadingState.loading));
-        _authRepo
-            .createUser(
-                state.emailController.text, state.passwordController.text)
-            .then((value) =>
-                emit(state.updateState(loadingState: LoadingState.notLoading)))
-            .onError((error, stackTrace) =>
-                state.updateState(loadingState: LoadingState.error));
+        emit(state.updateState(loadingState: const Loading()));
+        try {
+          _authRepo
+              .createUser(event.email!, event.password!)
+              .then((value) =>
+                  emit(state.updateState(loadingState: const NotLoading())))
+              .onError((error, stackTrace) => state.updateState(
+                  loadingState: LoadingError(error.toString())));
+          event.onCreateNavigate();
+        } on Error catch (e) {
+          emit(state.updateState(loadingState: LoadingError(e.toString())));
+        }
       }
     });
   }

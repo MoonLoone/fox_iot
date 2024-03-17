@@ -9,10 +9,9 @@ class SignInState {
   final bool isPasswordVisible;
   final LoadingState loadingState;
   final bool isAuthorized;
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
 
-  SignInState({this.email = "",
+
+  const SignInState({this.email = "",
     this.password = "",
     this.isPasswordVisible = false,
     this.loadingState = const NotLoading(),
