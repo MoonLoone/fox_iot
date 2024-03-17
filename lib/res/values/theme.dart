@@ -26,10 +26,13 @@ class FoxIotTheme {
   static final FoxTextStyles textStyles = FoxTextStyles(
     primary: TextStyle(fontSize: 16, color: colors.textPrimary),
     secondary: TextStyle(fontSize: 12, color: colors.textSecondary),
-    h1: TextStyle(fontSize: 56, color: colors.textPrimary),
-    h2: TextStyle(fontSize: 48, color: colors.textPrimary),
-    h3: TextStyle(fontSize: 32, color: colors.textPrimary),
-    h4: TextStyle(fontSize: 24, color: colors.textPrimary),
+    h1: TextStyle(
+        fontSize: 56, color: colors.textPrimary, fontWeight: FontWeight.bold),
+    h2: TextStyle(
+        fontSize: 48, color: colors.textPrimary, fontWeight: FontWeight.bold),
+    h3: TextStyle(
+        fontSize: 32, color: colors.textPrimary, fontWeight: FontWeight.bold),
+    h4: TextStyle(fontSize: 24, color: colors.textPrimary, fontWeight: FontWeight.bold),
   );
 
   static final Map<FoxIotAssetName, FoxIoTAsset> assets = {
@@ -62,8 +65,8 @@ class FoxIotTheme {
         url: "${_BASE_ASSET_DIR}rules_un.png", size: sizes.primaryIconSize),
     FoxIotAssetName.addDevice: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}add_device.png", size: sizes.primaryIconSize),
-    FoxIotAssetName.bulb:
-        FoxIoTAsset(url: "${_BASE_ASSET_DIR}bulb.png", size: const Size(48, 48)),
+    FoxIotAssetName.bulb: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}bulb.png", size: const Size(48, 48)),
     FoxIotAssetName.hub:
         FoxIoTAsset(url: "${_BASE_ASSET_DIR}hub.png", size: const Size(48, 48)),
     FoxIotAssetName.errorSearch: FoxIoTAsset(
@@ -79,15 +82,21 @@ class FoxIotTheme {
     FoxIotAssetName.exit: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}exit.png", size: sizes.primaryIconSize),
     FoxIotAssetName.familyMembers: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}family_members.png", size: sizes.secondaryIconSize),
+        url: "${_BASE_ASSET_DIR}family_members.png",
+        size: sizes.secondaryIconSize),
     FoxIotAssetName.activeDevices: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}active_devices.png", size: sizes.secondaryIconSize),
+        url: "${_BASE_ASSET_DIR}active_devices.png",
+        size: sizes.secondaryIconSize),
     FoxIotAssetName.nextArrow: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}next_arrow.png", size: sizes.primaryIconSize),
     FoxIotAssetName.signUpFoxGif: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}sign_up_fox_gif.png", size: sizes.primaryIconSize),
+        url: "${_BASE_ASSET_DIR}sign_up_fox_gif.png",
+        size: sizes.primaryIconSize),
     FoxIotAssetName.google: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}devicon_google.png", size: sizes.primaryIconSize),
+        url: "${_BASE_ASSET_DIR}devicon_google.png",
+        size: sizes.primaryIconSize),
+    FoxIotAssetName.logo1: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}logo1.png",
+        size: sizes.primaryIconSize),
   };
-
 }

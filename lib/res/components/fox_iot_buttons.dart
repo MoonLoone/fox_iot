@@ -24,7 +24,7 @@ class FoxIoTPrimaryButton extends StatelessWidget {
             style: ButtonStyle(
                 backgroundColor:
                     MaterialStateProperty.all(FoxIotTheme.colors.third),
-                padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
+                padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 12)),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100)))),
             child: Row(
@@ -33,7 +33,7 @@ class FoxIoTPrimaryButton extends StatelessWidget {
                 if (trailingItem != null) trailingItem!,
                 Text(
                   btnText ?? "",
-                  style: FoxIotTheme.textStyles.primary
+                  style: FoxIotTheme.textStyles.h4
                       .copyWith(color: FoxIotTheme.colors.onThird),
                 ),
                 if (leadingItem != null) leadingItem!

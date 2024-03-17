@@ -31,65 +31,55 @@ class WelcomeDialog extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
+
                     //Logo
                     Image.asset(
-                      "lib/res/assets/logo1.png",
+                      safetyGetAsset(FoxIotAssetName.logo1).url,
                       height: MediaQuery.of(context).size.height * 0.4,
                       width: MediaQuery.of(context).size.width * 0.4,
                       scale: 0.8,
                     ),
                     const SizedBox(height: 16),
-                    FractionallySizedBox(
-                      widthFactor: 0.8,
-                      child: TextButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, SignInPage.navId),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                FoxIotTheme.colors.primary),
-                            padding: MaterialStateProperty.all(
-                                const EdgeInsets.all(20)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16)))),
-                        child: Text(
-                          S.of(context).signIn,
-                          style: TextStyle(
-                              color: FoxIotTheme.colors.textPrimary,
-                              fontSize: 16),
-                        ),
-                      ),
-                    ),
+                    _SignInOutButton(
+                        () => Navigator.pushNamed(context, SignInPage.navId),
+                        S.of(context).signIn),
                     const SizedBox(height: 16),
-                    FractionallySizedBox(
-                      widthFactor: 0.8,
-                      child: TextButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, SignUpPage.navId),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                FoxIotTheme.colors.primary),
-                            padding: MaterialStateProperty.all(
-                                const EdgeInsets.all(20)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16)))),
-                        child: Text(
-                          S.of(context).signUp,
-                          style: TextStyle(
-                              color: FoxIotTheme.colors.textPrimary,
-                              fontSize: 16),
-                        ),
-                      ),
-                    ),
+                    _SignInOutButton(
+                        () => Navigator.pushNamed(context, SignUpPage.navId),
+                        S.of(context).signUp),
                     const SizedBox(height: 20),
-                    //SignUp
                     _SignUsingGoogle(() => {})
-                    //Connect using networks
                   ],
                 ))),
       )
     ]);
+  }
+}
+
+class _SignInOutButton extends StatelessWidget {
+  final Function() onClick;
+  final String text;
+
+  const _SignInOutButton(this.onClick, this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return FractionallySizedBox(
+      widthFactor: 0.8,
+      child: TextButton(
+        onPressed: onClick,
+        style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.all(FoxIotTheme.colors.primary),
+            padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16)))),
+        child: Text(
+          text,
+          style: FoxIotTheme.textStyles.h4,
+        ),
+      ),
+    );
   }
 }
 
@@ -128,38 +118,6 @@ class _SignUsingGoogle extends StatelessWidget {
                 child: Image.asset(safetyGetAsset(FoxIotAssetName.google).url),
               )
             ]))
-        /*InkWell(
-            onTap: onClick,
-            child: Container(
-                decoration: BoxDecoration(
-                  color: FoxIotTheme.colors.third,
-                  borderRadius: BorderRadius.circular(16.0),
-                  border: const Border(),
-                ),
-                child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-                    child: Center(
-                      child: Row(children: [
-                        Text(
-                          "Or connect using",
-                          textAlign: TextAlign.center,
-                          style: FoxIotTheme.textStyles.primary
-                              .copyWith(color: FoxIotTheme.colors.onThird),
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          width: 32.0,
-                          height: 32.0,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: FoxIotTheme.colors.primaryContainer,
-                          ),
-                          child: Image.asset(
-                              safetyGetAsset(FoxIotAssetName.google).url),
-                        )
-                      ]),
-                    ))))*/
         );
   }
 }

@@ -16,6 +16,7 @@ class UndefinedAsset extends FoxIoTAsset {
 }
 
 enum FoxIotAssetName {
+  logo1,
   undefined,
   email,
   passwordLock,
