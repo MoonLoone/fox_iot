@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fox_iot/feature/home/home_page.dart';
@@ -114,10 +115,17 @@ class SignInPageState extends State<SignInPage> {
                           const SizedBox(
                             height: 32,
                           ),
-                          Text(
-                            S.of(context).forgot_password,
-                            style: FoxIotTheme.textStyles.primary,
-                          )
+                          RichText(
+                              text: TextSpan(children: [
+                            TextSpan(
+                                text: S.of(context).forgot_password,
+                                style: FoxIotTheme.textStyles.primary.copyWith(
+                                    color: Colors.blue,
+                                    decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {}),
+                                //todo Forgot password
+                          ]))
                         ],
                       )))),
             ))
