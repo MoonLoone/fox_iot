@@ -90,7 +90,7 @@ class FoxIotTheme {
     FoxIotAssetName.nextArrow: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}next_arrow.png", size: sizes.primaryIconSize),
     FoxIotAssetName.signUpFoxGif: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}sign_up_fox_gif.png",
+        url: "${_BASE_ASSET_DIR}sign_up_fox_gif.gif",
         size: sizes.primaryIconSize),
     FoxIotAssetName.google: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}devicon_google.png",

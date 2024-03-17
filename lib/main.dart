@@ -16,7 +16,7 @@ import 'package:hive/hive.dart';
 
 import 'feature/auth/presentation/sign_in_page/SignInBloc.dart';
 import 'feature/auth/presentation/sign_in_page/SignInPage.dart';
-import 'feature/auth/presentation/sign_up_page/pres/SignUpPage.dart';
+import 'feature/auth/presentation/sign_up_page/SignUpPage.dart';
 import 'feature/devices/presentation/devices_bloc.dart';
 import 'feature/devices/presentation/devices_page.dart';
 import 'feature/hardware_adapters/bluetooth/presentation/bluetooth_devices_bloc.dart';

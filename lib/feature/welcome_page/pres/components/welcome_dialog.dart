@@ -5,7 +5,7 @@ import 'package:fox_iot/res/values/theme.dart';
 import 'package:fox_iot/utils/AssetsManipulations.dart';
 
 import '../../../auth/presentation/sign_in_page/SignInPage.dart';
-import '../../../auth/presentation/sign_up_page/pres/SignUpPage.dart';
+import '../../../auth/presentation/sign_up_page/SignUpPage.dart';
 
 class WelcomeDialog extends StatelessWidget {
   const WelcomeDialog({super.key});
