@@ -98,5 +98,8 @@ class FoxIotTheme {
     FoxIotAssetName.logo1: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}logo1.png",
         size: sizes.primaryIconSize),
+    FoxIotAssetName.back: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}back_btn.svg",
+        size: sizes.primaryIconSize),
   };
 }

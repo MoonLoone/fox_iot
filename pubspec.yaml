@@ -23,8 +23,7 @@ dependencies:
   hive_generator: ^2.0.1
   build_runner: ^2.0.0
   http: ^1.1.1
-  oauth2_client: ^3.2.2
-  crypto: ^3.0.1
+  flutter_svg: ^0.22.0
 
 provider:
   intl: ^0.17.0
@@ -39,6 +38,7 @@ flutter:
   generate: true
   assets:
     - lib/res/assets/logo1.png
+    - lib/res/assets/back_btn.svg
     - lib/res/assets/devicon_google.png
     - lib/res/assets/sign_up_fox_gif.gif
     - lib/res/assets/visible_icon.png

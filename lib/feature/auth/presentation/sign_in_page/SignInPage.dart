@@ -1,11 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fox_iot/feature/home/home_page.dart';
+import 'package:fox_iot/feature/welcome_page/pres/welcome_page.dart';
 import 'package:fox_iot/res/components/background.dart';
 import 'package:fox_iot/res/components/fox_iot_buttons.dart';
 import 'package:fox_iot/res/values/assets.dart';
 import 'package:fox_iot/res/values/theme.dart';
+import 'package:fox_iot/utils/AssetsManipulations.dart';
 
 import '../../../../res/values/s.dart';
 import 'SignInBloc.dart';
@@ -57,10 +60,21 @@ class SignInPageState extends State<SignInPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Text(
-                            S.of(context).signIn,
-                            style: FoxIotTheme.textStyles.h2,
-                            textAlign: TextAlign.center,
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              _BackButton(() => {
+                                    Navigator.pushNamed(
+                                        context, WelcomePage.navId)
+                                  }),
+                              Text(
+                                S.of(context).signIn,
+                                style: FoxIotTheme.textStyles.h2,
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox()
+                            ],
                           ),
                           const SizedBox(
                             height: 16,
@@ -124,12 +138,40 @@ class SignInPageState extends State<SignInPage> {
                                     decoration: TextDecoration.underline),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () async {}),
-                                //todo Forgot password
+                            //todo Forgot password
                           ]))
                         ],
                       )))),
             ))
           ])));
     });
+  }
+}
+
+class _BackButton extends StatelessWidget {
+  final Function() onClick;
+
+  const _BackButton(this.onClick);
+
+  @override
+  Widget build(BuildContext context) {
+    FoxIoTAsset backAsset = safetyGetAsset(FoxIotAssetName.back);
+    return GestureDetector(
+        onTap: onClick,
+        child: Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+                color: FoxIotTheme.colors.third,
+                shape: BoxShape.circle,
+                border: Border.all()),
+            child: Padding(
+              padding: const EdgeInsets.all(4),
+              child: SvgPicture.asset(
+                backAsset.url,
+                width: backAsset.size.width,
+                height: backAsset.size.width,
+              ),
+            )));
   }
 }

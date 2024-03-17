@@ -43,5 +43,6 @@ enum FoxIotAssetName {
   familyMembers,
   nextArrow,
   google,
-  signUpFoxGif
+  signUpFoxGif,
+  back
 }
