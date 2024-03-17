@@ -44,8 +44,6 @@ class FoxIotTheme {
         url: "${_BASE_ASSET_DIR}person_icon.png", size: sizes.primaryIconSize),
     FoxIotAssetName.visible: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}visible_icon.png", size: sizes.primaryIconSize),
-    FoxIotAssetName.facebook: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}icon_facebook.png", size: sizes.primaryIconSize),
     FoxIotAssetName.navbarHomeSelected: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}home_s.png", size: sizes.primaryIconSize),
     FoxIotAssetName.navbarAccountSelected: FoxIoTAsset(
@@ -86,6 +84,10 @@ class FoxIotTheme {
         url: "${_BASE_ASSET_DIR}active_devices.png", size: sizes.secondaryIconSize),
     FoxIotAssetName.nextArrow: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}next_arrow.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.signUpFoxGif: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}sign_up_fox_gif.png", size: sizes.primaryIconSize),
+    FoxIotAssetName.google: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}devicon_google.png", size: sizes.primaryIconSize),
   };
 
 }

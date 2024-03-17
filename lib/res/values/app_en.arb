@@ -20,5 +20,6 @@
   "settings": "Settings",
   "family": "Family Details",
   "support": "Support",
-  "exit": "Exit"
+  "exit": "Exit",
+  "or_connect_using": "Or connect using"
 }

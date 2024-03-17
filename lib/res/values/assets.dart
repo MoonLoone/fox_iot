@@ -21,7 +21,6 @@ enum FoxIotAssetName {
   passwordLock,
   person,
   visible,
-  facebook,
   addDevice,
   navbarHomeSelected,
   navbarAccountSelected,
@@ -41,5 +40,7 @@ enum FoxIotAssetName {
   exit,
   activeDevices,
   familyMembers,
-  nextArrow
+  nextArrow,
+  google,
+  signUpFoxGif
 }
