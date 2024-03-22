@@ -18,7 +18,7 @@ class SignUpBloc extends Bloc<SignUpActions, SignUpState> {
         emit(state.updateState(loadingState: const Loading()));
         try {
           _authRepo
-              .createUser(event.email!, event.password!)
+              .createAuthUser(event.email!, event.password!)
               .then((value) =>
                   emit(state.updateState(loadingState: const NotLoading())))
               .onError((error, stackTrace) => state.updateState(

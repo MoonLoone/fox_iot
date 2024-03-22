@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpContracts.dart';
 import 'package:fox_iot/feature/home/home_page.dart';
+import 'package:fox_iot/feature/welcome_page/pres/welcome_page.dart';
 import 'package:fox_iot/utils/AssetsManipulations.dart';
 
 import '../../../../res/components/background.dart';
@@ -45,7 +46,11 @@ class SignUpPageState extends State<SignUpPage> {
                   const SizedBox(
                     height: 32,
                   ),
-                  _NavigationAnimateRow(() => {}, () => {}),
+                  _NavigationAnimateRow(
+                      () => Navigator.pushNamed(context, WelcomePage.navId),
+                      () => {
+                            //todo Перейти на MainInfoPage
+                          }),
                   const SizedBox(height: 24),
                   DecoratedBox(
                       decoration: BoxDecoration(
@@ -56,7 +61,6 @@ class SignUpPageState extends State<SignUpPage> {
                           padding: const EdgeInsets.only(
                             left: 32,
                             right: 32,
-                            bottom: 32,
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -122,32 +126,6 @@ class SignUpPageState extends State<SignUpPage> {
                               ),
                               const SizedBox(
                                 height: 24,
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  bloc.add(NextButtonClick(
-                                      () => Navigator.pushNamed(
-                                          context, HomePage.navId),
-                                      email: emailController.text,
-                                      password: passwordController.text,
-                                      passwordCheck:
-                                          passwordCheckController.text));
-                                },
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        FoxIotTheme.colors.third),
-                                    padding: MaterialStateProperty.all(
-                                        const EdgeInsets.all(20)),
-                                    shape: MaterialStateProperty.all(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(100)))),
-                                child: Text(
-                                  S.of(context).next,
-                                  style: FoxIotTheme.textStyles.primary
-                                      .copyWith(
-                                          color: FoxIotTheme.colors.onThird),
-                                ),
                               ),
                             ],
                           ))),

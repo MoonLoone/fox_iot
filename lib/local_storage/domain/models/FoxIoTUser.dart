@@ -1,7 +1,8 @@
 
-import 'package:fox_iot/local_storage/hive/BoxesStorage.dart';
-import 'package:fox_iot/local_storage/models/MainUserInfo.dart';
 import 'package:hive/hive.dart';
+
+import '../../data/hive/BoxesStorage.dart';
+import 'MainUserInfo.dart';
 part 'FoxIoTUser.g.dart';
 
 /** Изменения необходимо вносить также в UserAdapter **/

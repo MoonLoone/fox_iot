@@ -37,9 +37,9 @@ class SignInClick extends SignInActions {
 
   late final String? email;
   late final String? password;
-  late Function()? navigateWhenAuth;
+  late Function() navigateWhenAuth;
 
-  SignInClick({this.email, this.password, this.navigateWhenAuth});
+  SignInClick({this.email, this.password, required this.navigateWhenAuth});
 
 }
 

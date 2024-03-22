@@ -1,78 +1,108 @@
-import 'dart:developer';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fox_iot/feature/auth/domain/IAuthRepo.dart';
 import 'package:fox_iot/feature/auth/domain/models/FoxIoTUser.dart';
+import 'package:fox_iot/utils/safe_operations.dart';
+import 'package:get_it/get_it.dart';
+
+import '../../../local_storage/domain/IFoxIoTUserDb.dart';
+import '../../../local_storage/domain/models/FoxIoTUser.dart';
+import '../../../local_storage/domain/models/MainUserInfo.dart';
+import '../../../utils/models/Response.dart';
+import '../../../utils/user_ext.dart';
 
 extension on UserCredential {
-  AuthUserDTO toDomainModel() =>
-      AuthUserDTO(name: user?.displayName ?? "", email: user?.email ?? "");
+  AuthUserDTO toDomainModel() => AuthUserDTO(
+      uid: user?.uid ?? "",
+      name: user?.displayName ?? "",
+      email: user?.email ?? "");
+}
+
+extension on DocumentSnapshot<Map<String, dynamic>> {
+  FoxIoTUser toFoxIoTUser(String userUID) {
+    String firstName = data()?["firstname"] ?? "";
+    String lastname = data()?["lastname"] ?? "";
+    String avatarUrl = data()?["avatar_url"] ?? "";
+    String bio = data()?["bio"] ?? "";
+    MainUserInfo mainUserInfo = MainUserInfo(
+        firstName: firstName,
+        lastName: lastname,
+        bio: bio,
+        avatarUrl: avatarUrl);
+    return FoxIoTUser(id: userUID, mainUserInfo: mainUserInfo);
+  }
 }
 
 class AuthRepo extends IAuthRepo {
   final String authUrl = "https://openapi.tuyaeu.com/v1.0/token?grantType=1";
 
-  /* String calcSign(String clientId, String timestamp, String nonce, String signStr, String secret) {
-    var str = clientId + timestamp + nonce + signStr;
-    //var key = utf8.encode(secret);
-    var bytes = utf8.encode(str);
-    List<int> key = base64.decode(secret);
-    //var hmacSha256 = Hmac(sha256, key);
-    var hmacSha256 = Hmac(sha256, key);
-    var digest = hmacSha256.convert(bytes);
-    return digest.toString().toUpperCase();
-  }*/
-
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final IFoxIoTUserDb _userDb = GetIt.I.get<IFoxIoTUserDb>();
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
   @override
-  Future<AuthUserDTO> createUser(String email, String password) async {
-    log(email + password);
-    return _firebaseAuth
+  Future<Response<AuthUserDTO>> createAuthUser(
+      String email, String password) async {
+    return safeApiRequest(() => _firebaseAuth
         .createUserWithEmailAndPassword(email: email, password: password)
-        .then((value) {
-          log(value.toString());
-          return value.toDomainModel();
-        })
-        .timeout(const Duration(seconds: 20))
-        .catchError((e) {
-          log(e.toString());
-        });
-  }
-
-  /*@override
-  void createUser() async {
-    String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-    String clientId = "mpcvcxe8uaex39rckn7m";
-    String secret = "b9632c233f9444caa0d147cab996529b";
-    Map<String, String> headers = {
-      't': timestamp,
-      "sign_method": "HMAC-SHA256",
-      "client_id": clientId,
-      "sign": calcSign(clientId, timestamp, "", "", secret)
-    };
-    log(calcSign(clientId, timestamp, "", "", secret));
-    Response response = await http.get(Uri.parse(authUrl), headers: headers);
-    log(response.body);
-    log(response.request.toString());
-  }*/
-
-  @override
-  Future<AuthUserDTO> authorizeWithEmail(String email, String password) async {
-    return (await _firebaseAuth.signInWithEmailAndPassword(
-            email: email, password: password))
-        .toDomainModel();
+        .then((value) => value.toDomainModel()));
   }
 
   @override
-  Future<AuthUserDTO> authorizeWithGoogle() async {
-    return AuthUserDTO(name: '', email: '');
+  Future<Response<AuthUserDTO>> authorizeWithEmailAndPassword(
+      String email, String password, Function() onSuccessCallback) async {
+    return safeApiRequest(() => _firebaseAuth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((value) async {
+          AuthUserDTO userDTO = value.toDomainModel();
+          Response<FoxIoTUser> userInfoResponse =
+              await _getAuthorizedUserInfo(userDTO.uid);
+          if (userInfoResponse is SuccessResponse) {
+            _addUserToDatabase((userInfoResponse as SuccessResponse).data);
+            onSuccessCallback();
+          }
+          return userDTO;
+        }));
+  }
+
+  Future<Response<FoxIoTUser>> _getAuthorizedUserInfo(String userUID) async {
+    //todo Сделать интеграцию с Firestore
+    return safeApiRequest(() {
+      return _firebaseFirestore
+          .collection("users")
+          .doc(userUID)
+          .get()
+          .then((value) => value.toFoxIoTUser(userUID));
+    });
+  }
+
+  void _addUserToDatabase(FoxIoTUser foxIoTUser) {
+    _userDb.replaceCurrentUser(foxIoTUser);
   }
 
   @override
-  Future<bool> logout() {
-    return _firebaseAuth
-        .signOut()
-        .then((value) => _firebaseAuth.currentUser == null);
+  Future<Response<AuthUserDTO>> authorizeWithGoogle(
+      Function() onSuccessCallback) async {
+    //todo Авторизация через Google
+    return SuccessResponse(AuthUserDTO(uid: "", name: '', email: ''));
+  }
+
+  @override
+  Future<Response<bool>> logout() async {
+    return safeApiRequest(() => _firebaseAuth.signOut().then((_) {
+          return _firebaseAuth.currentUser == null;
+        }));
+  }
+
+  @override
+  Future<Response<bool>> createUserRemote(FoxIoTUser foxIoTUser) {
+    return safeApiRequest(() {
+      _firebaseFirestore
+          .collection("users")
+          .doc(foxIoTUser.id)
+          .set(getUserDocument(foxIoTUser));
+      final docRef = _firebaseFirestore.collection("users").doc(foxIoTUser.id);
+      return docRef.get().then((value) => value.exists);
+    });
   }
 }

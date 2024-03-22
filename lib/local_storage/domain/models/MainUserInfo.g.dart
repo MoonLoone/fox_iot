@@ -19,17 +19,23 @@ class MainUserInfoAdapter extends TypeAdapter<MainUserInfo> {
     return MainUserInfo(
       firstName: fields[0] as String,
       lastName: fields[1] as String?,
+      bio: fields[2] as String?,
+      avatarUrl: fields[3] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, MainUserInfo obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.firstName)
       ..writeByte(1)
-      ..write(obj.lastName);
+      ..write(obj.lastName)
+      ..writeByte(2)
+      ..write(obj.bio)
+      ..writeByte(3)
+      ..write(obj.avatarUrl);
   }
 
   @override

@@ -1,7 +1,7 @@
-import 'package:fox_iot/local_storage/models/MainUserInfo.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import '../models/FoxIoTUser.dart';
+import '../../domain/models/FoxIoTUser.dart';
+import '../../domain/models/MainUserInfo.dart';
 
 Future<void> initializeLocalStorage() async {
   await Hive.initFlutter();
