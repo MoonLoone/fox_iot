@@ -21,5 +21,7 @@
   "family": "Family Details",
   "support": "Support",
   "exit": "Exit",
-  "or_connect_using": "Or connect using"
+  "or_connect_using": "Or connect using",
+  "enter_your_bio": "Enter your bio",
+  "enter_your_name": "Enter your name"
 }

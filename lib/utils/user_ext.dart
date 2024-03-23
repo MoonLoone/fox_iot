@@ -5,8 +5,7 @@ Map<String, dynamic> getUserDocument(FoxIoTUser user){
     return {
         "avatar_url": user.mainUserInfo.avatarUrl,
         "bio": user.mainUserInfo.bio,
-        "firstname": user.mainUserInfo.firstName,
-        "lastname": user.mainUserInfo.lastName
+        "firstname": user.mainUserInfo.name,
     };
 }
 

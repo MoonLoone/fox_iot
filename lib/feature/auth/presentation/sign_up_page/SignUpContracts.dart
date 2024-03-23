@@ -50,8 +50,14 @@ class NextButtonClick extends SignUpActions {
   late final String? email;
   late final String? password;
   late final String? passwordCheck;
-  late Function() onCreateNavigate;
+  late Function(String) onCreateNavigate;
 
   NextButtonClick(this.onCreateNavigate,
       {this.email, this.password, this.passwordCheck});
+}
+
+class PreviousButtonClick extends SignUpActions{
+  late Function() prevNavigate;
+
+  PreviousButtonClick(this.prevNavigate);
 }

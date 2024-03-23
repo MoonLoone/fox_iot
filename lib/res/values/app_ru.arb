@@ -21,5 +21,7 @@
   "family": "Семья",
   "support": "Поддержка",
   "exit": "Выйти",
-  "or_connect_using": "Или зайти при помощи"
+  "or_connect_using": "Или зайти при помощи",
+  "enter_your_bio": "Напишите о себе",
+  "enter_your_name": "Василий Пупкин"
 }

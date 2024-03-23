@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fox_iot/di/Singleton.dart';
 import 'package:fox_iot/feature/account/account_page.dart';
+import 'package:fox_iot/feature/auth/presentation/main_info_page/MainInfoPage.dart';
 import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpBloc.dart';
 import 'package:fox_iot/feature/home/home_page.dart';
 import 'package:fox_iot/feature/rules/rules_page.dart';
@@ -13,6 +14,7 @@ import 'package:fox_iot/local_storage/domain/IFoxIoTUserDb.dart';
 import 'package:fox_iot/res/values/s.dart';
 import 'package:get_it/get_it.dart';
 
+import 'feature/auth/presentation/main_info_page/MainInfoBloc.dart';
 import 'feature/auth/presentation/sign_in_page/SignInBloc.dart';
 import 'feature/auth/presentation/sign_in_page/SignInPage.dart';
 import 'feature/auth/presentation/sign_up_page/SignUpPage.dart';
@@ -72,13 +74,18 @@ class FoxIoTApp extends StatelessWidget {
               lazy: true,
               child: const BlueDevicesPage(),
             ),
+        MainInfoPage.navId: (context) => BlocProvider(
+          create: (context) => MainInfoBloc(),
+          lazy: true,
+          child: MainInfoPage(),
+        ),
       },
     );
   }
 
   Widget _getStartWidget(FoxIoTUser? currentUser) {
-    if (currentUser != null) return const WelcomePage();
+    if (currentUser == null) return const WelcomePage();
     //TODO navigate to main page
-    return BlocProvider(create: (context) => SignUpBloc(), child: SignUpPage());
+    return HomePage();
   }
 }

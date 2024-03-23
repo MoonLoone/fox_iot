@@ -6,22 +6,19 @@ part 'MainUserInfo.g.dart';
 @HiveType(typeId: BoxesStorage.mainInfoAdapterId)
 class MainUserInfo extends HiveObject {
   @HiveField(0)
-  final String firstName;
+  final String? name;
   @HiveField(1)
-  final String? lastName;
-  @HiveField(2)
   final String? bio;
-  @HiveField(3)
+  @HiveField(2)
   final String? avatarUrl;
 
   MainUserInfo(
-      {required this.firstName,
-      required this.lastName,
+      {required this.name,
       required this.bio,
       required this.avatarUrl});
 
   @override
   String toString() {
-    return 'MainUserInfo{firstName: $firstName, lastName: $lastName, avatar: $avatarUrl, bio: $bio}';
+    return 'MainUserInfo{name: $name, avatar: $avatarUrl, bio: $bio}';
   }
 }

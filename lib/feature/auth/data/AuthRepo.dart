@@ -20,15 +20,11 @@ extension on UserCredential {
 
 extension on DocumentSnapshot<Map<String, dynamic>> {
   FoxIoTUser toFoxIoTUser(String userUID) {
-    String firstName = data()?["firstname"] ?? "";
-    String lastname = data()?["lastname"] ?? "";
+    String name = data()?["name"] ?? "";
     String avatarUrl = data()?["avatar_url"] ?? "";
     String bio = data()?["bio"] ?? "";
-    MainUserInfo mainUserInfo = MainUserInfo(
-        firstName: firstName,
-        lastName: lastname,
-        bio: bio,
-        avatarUrl: avatarUrl);
+    MainUserInfo mainUserInfo =
+        MainUserInfo(name: name, bio: bio, avatarUrl: avatarUrl);
     return FoxIoTUser(id: userUID, mainUserInfo: mainUserInfo);
   }
 }
@@ -44,8 +40,11 @@ class AuthRepo extends IAuthRepo {
   Future<Response<AuthUserDTO>> createAuthUser(
       String email, String password) async {
     return safeApiRequest(() => _firebaseAuth
-        .createUserWithEmailAndPassword(email: email, password: password)
-        .then((value) => value.toDomainModel()));
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then((value) {
+          final domainModel = value.toDomainModel();
+          return domainModel;
+        }));
   }
 
   @override
@@ -95,13 +94,14 @@ class AuthRepo extends IAuthRepo {
   }
 
   @override
-  Future<Response<bool>> createUserRemote(FoxIoTUser foxIoTUser) {
-    return safeApiRequest(() {
+  Future<Response<bool>> sendMainUserInfo(String userId, MainUserInfo mainUserInfo) {
+    return safeApiRequest(() async {
+      final user = FoxIoTUser(id: userId, mainUserInfo: mainUserInfo);
       _firebaseFirestore
           .collection("users")
-          .doc(foxIoTUser.id)
-          .set(getUserDocument(foxIoTUser));
-      final docRef = _firebaseFirestore.collection("users").doc(foxIoTUser.id);
+          .doc(userId)
+          .set(getUserDocument(user));
+      final docRef = _firebaseFirestore.collection("users").doc(userId);
       return docRef.get().then((value) => value.exists);
     });
   }

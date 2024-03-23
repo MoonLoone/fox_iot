@@ -101,5 +101,11 @@ class FoxIotTheme {
     FoxIotAssetName.back: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}back_btn.svg",
         size: sizes.primaryIconSize),
+    FoxIotAssetName.enterName: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}enter_name.svg",
+        size: sizes.primaryIconSize),
+    FoxIotAssetName.bio: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}bio.svg",
+        size: sizes.primaryIconSize),
   };
 }

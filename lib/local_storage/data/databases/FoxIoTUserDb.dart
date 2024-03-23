@@ -20,10 +20,12 @@ class FoxIoTUserDb extends IFoxIoTUserDb {
   }
 
   @override
-  Future<void>? replaceCurrentUser(FoxIoTUser newUser) {
+  Future<void>? replaceCurrentUser(FoxIoTUser? newUser) {
     return dbImpl?.then((value){
       value.clear();
-      value.add(newUser);
+      if (newUser != null) {
+        value.add(newUser);
+      }
     });
   }
 }
