@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../res/components/background.dart';
-import '../../res/components/navbar/navbar.dart';
-import '../../res/components/navbar/navbar_states.dart';
+import '../../../res/components/background.dart';
+import '../../../res/components/navbar/navbar.dart';
+import '../../../res/components/navbar/navbar_states.dart';
 
 class HomePage extends StatefulWidget {
   static const String navId = "home_page";
@@ -14,12 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  static const MethodChannel channel = MethodChannel("tuya_sdk");
-
-  sendEvent() {
-    channel.invokeMethod("send_event");
-  }
 
   @override
   Widget build(BuildContext context) {

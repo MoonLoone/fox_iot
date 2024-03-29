@@ -7,7 +7,7 @@ import 'package:fox_iot/di/Singleton.dart';
 import 'package:fox_iot/feature/account/account_page.dart';
 import 'package:fox_iot/feature/auth/presentation/main_info_page/MainInfoPage.dart';
 import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpBloc.dart';
-import 'package:fox_iot/feature/home/home_page.dart';
+import 'package:fox_iot/feature/home/pres/HomePage.dart';
 import 'package:fox_iot/feature/rules/rules_page.dart';
 import 'package:fox_iot/feature/welcome_page/pres/welcome_page.dart';
 import 'package:fox_iot/local_storage/domain/IFoxIoTUserDb.dart';

@@ -43,6 +43,7 @@ flutter:
     - lib/res/assets/back_btn.svg
     - lib/res/assets/bio.svg
     - lib/res/assets/enter_name.svg
+    - lib/res/assets/add_room.svg
     - lib/res/assets/devicon_google.png
     - lib/res/assets/sign_up_fox_gif.gif
     - lib/res/assets/visible_icon.png

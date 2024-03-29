@@ -11,7 +11,7 @@ import com.thingclips.smart.home.sdk.ThingHomeSdk
 
 class MainActivity : FlutterActivity() {
 
-    private val channelName = "tuya_sdk"
+    private val channelName = "fox_iot"
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)

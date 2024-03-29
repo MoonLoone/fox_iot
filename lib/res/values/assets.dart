@@ -46,5 +46,6 @@ enum FoxIotAssetName {
   signUpFoxGif,
   back,
   enterName,
-  bio
+  bio,
+  addRoom
 }

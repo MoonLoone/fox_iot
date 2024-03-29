@@ -107,5 +107,8 @@ class FoxIotTheme {
     FoxIotAssetName.bio: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}bio.svg",
         size: sizes.primaryIconSize),
+    FoxIotAssetName.addRoom: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}add.svg",
+        size: sizes.primaryIconSize),
   };
 }

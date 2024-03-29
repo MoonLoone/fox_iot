@@ -9,7 +9,6 @@ class FoxIoTApp: Application() {
     override fun onCreate() {
         super.onCreate()
         ThingHomeSdk.init(this)
-        Log.d("!!!", this.packageName.toString())
     }
 
     override fun onTerminate() {
