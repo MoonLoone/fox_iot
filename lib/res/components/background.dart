@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fox_iot/res/values/theme.dart';
 
 class Background extends StatelessWidget {
-  final StatefulWidget _childWidget;
+  final Widget _childWidget;
 
   Background(this._childWidget, {super.key});
 

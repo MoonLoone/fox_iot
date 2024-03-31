@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fox_iot/feature/home/pres/HomePage.dart';
+import 'package:fox_iot/feature/home/pres/home_page/HomePage.dart';
 import 'package:fox_iot/feature/welcome_page/pres/welcome_page.dart';
 import 'package:fox_iot/res/components/background.dart';
 import 'package:fox_iot/res/components/fox_iot_buttons.dart';

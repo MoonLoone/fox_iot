@@ -47,5 +47,8 @@ enum FoxIotAssetName {
   back,
   enterName,
   bio,
-  addRoom
+  addRoom,
+  room,
+  pencil,
+  home
 }

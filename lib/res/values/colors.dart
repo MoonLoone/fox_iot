@@ -3,6 +3,7 @@ import 'dart:ui';
 class FoxIoTColors {
   final Color primary;
   final Color secondary;
+  final Color fourth;
   final Color primaryContainer;
   final Color tint;
   final Color textPrimary;
@@ -13,6 +14,7 @@ class FoxIoTColors {
   FoxIoTColors(
       {required this.primary,
       required this.secondary,
+      required this.fourth,
       required this.primaryContainer,
       required this.tint,
       required this.textPrimary,

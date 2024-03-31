@@ -7,11 +7,15 @@ import 'package:fox_iot/di/Singleton.dart';
 import 'package:fox_iot/feature/account/account_page.dart';
 import 'package:fox_iot/feature/auth/presentation/main_info_page/MainInfoPage.dart';
 import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpBloc.dart';
-import 'package:fox_iot/feature/home/pres/HomePage.dart';
+import 'package:fox_iot/feature/home/pres/create_home_page/CreateHomeBloc.dart';
+import 'package:fox_iot/feature/home/pres/create_home_page/CreateHomePage.dart';
+import 'package:fox_iot/feature/home/pres/home_page/HomeBloc.dart';
+import 'package:fox_iot/feature/home/pres/home_page/HomePage.dart';
 import 'package:fox_iot/feature/rules/rules_page.dart';
 import 'package:fox_iot/feature/welcome_page/pres/welcome_page.dart';
 import 'package:fox_iot/local_storage/domain/IFoxIoTUserDb.dart';
 import 'package:fox_iot/res/values/s.dart';
+import 'package:fox_iot/utils/IFoxIoTActions.dart';
 import 'package:get_it/get_it.dart';
 
 import 'feature/auth/presentation/main_info_page/MainInfoBloc.dart';
@@ -52,7 +56,11 @@ class FoxIoTApp extends StatelessWidget {
       home: _getStartWidget(currentUser),
       routes: {
         WelcomePage.navId: (context) => const WelcomePage(),
-        HomePage.navId: (context) => HomePage(),
+        HomePage.navId: (context) => BlocProvider(
+          create: (_) => HomePageBloc()..add(OnInit()),
+          lazy: true,
+          child: HomePage(),
+        ),
         RulesPage.navId: (context) => RulesPage(),
         AccountPage.navId: (context) => const AccountPage(),
         SignInPage.navId: (context) => BlocProvider(
@@ -79,6 +87,11 @@ class FoxIoTApp extends StatelessWidget {
           lazy: true,
           child: MainInfoPage(),
         ),
+        CreateHomePage.navId: (context) => BlocProvider(
+          create: (context) => CreateHomeBloc(),
+          lazy: true,
+          child: CreateHomePage(),
+        ),
       },
     );
   }
@@ -86,6 +99,10 @@ class FoxIoTApp extends StatelessWidget {
   Widget _getStartWidget(FoxIoTUser? currentUser) {
     if (currentUser == null) return const WelcomePage();
     //TODO navigate to main page
-    return HomePage();
+    return BlocProvider(
+      create: (context) => HomePageBloc()..add(OnInit()),
+      lazy: true,
+      child: HomePage(),
+    );
   }
 }

@@ -26,6 +26,7 @@ dependencies:
   http: ^1.1.1
   flutter_svg: ^0.22.0
   fluttertoast: ^8.0.8
+  expandable_menu: ^0.0.5
 
 provider:
   intl: ^0.17.0
@@ -44,6 +45,9 @@ flutter:
     - lib/res/assets/bio.svg
     - lib/res/assets/enter_name.svg
     - lib/res/assets/add_room.svg
+    - lib/res/assets/pencil.svg
+    - lib/res/assets/home.svg
+    - lib/res/assets/room.svg
     - lib/res/assets/devicon_google.png
     - lib/res/assets/sign_up_fox_gif.gif
     - lib/res/assets/visible_icon.png

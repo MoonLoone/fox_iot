@@ -21,6 +21,7 @@ class FoxIotTheme {
     textSecondary: const Color(0xFF898989),
     third: const Color(0xFFDE6640),
     onThird: const Color(0xFFffffff),
+    fourth: const Color(0xFFC63609),
   );
 
   static final FoxTextStyles textStyles = FoxTextStyles(
@@ -32,7 +33,8 @@ class FoxIotTheme {
         fontSize: 48, color: colors.textPrimary, fontWeight: FontWeight.bold),
     h3: TextStyle(
         fontSize: 32, color: colors.textPrimary, fontWeight: FontWeight.bold),
-    h4: TextStyle(fontSize: 24, color: colors.textPrimary, fontWeight: FontWeight.bold),
+    h4: TextStyle(
+        fontSize: 24, color: colors.textPrimary, fontWeight: FontWeight.bold),
   );
 
   static final Map<FoxIotAssetName, FoxIoTAsset> assets = {
@@ -96,19 +98,20 @@ class FoxIotTheme {
         url: "${_BASE_ASSET_DIR}devicon_google.png",
         size: sizes.primaryIconSize),
     FoxIotAssetName.logo1: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}logo1.png",
-        size: sizes.primaryIconSize),
+        url: "${_BASE_ASSET_DIR}logo1.png", size: sizes.primaryIconSize),
     FoxIotAssetName.back: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}back_btn.svg",
-        size: sizes.primaryIconSize),
+        url: "${_BASE_ASSET_DIR}back_btn.svg", size: sizes.primaryIconSize),
     FoxIotAssetName.enterName: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}enter_name.svg",
-        size: sizes.primaryIconSize),
+        url: "${_BASE_ASSET_DIR}enter_name.svg", size: sizes.primaryIconSize),
     FoxIotAssetName.bio: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}bio.svg",
-        size: sizes.primaryIconSize),
+        url: "${_BASE_ASSET_DIR}bio.svg", size: sizes.primaryIconSize),
     FoxIotAssetName.addRoom: FoxIoTAsset(
-        url: "${_BASE_ASSET_DIR}add.svg",
-        size: sizes.primaryIconSize),
+        url: "${_BASE_ASSET_DIR}add.svg", size: sizes.primaryIconSize),
+    FoxIotAssetName.room: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}room.svg", size: sizes.primaryIconSize),
+    FoxIotAssetName.pencil: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}pencil.svg", size: sizes.primaryIconSize),
+    FoxIotAssetName.home: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}home.svg", size: sizes.primaryIconSize),
   };
 }

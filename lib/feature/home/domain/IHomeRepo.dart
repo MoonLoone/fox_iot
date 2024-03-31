@@ -1,11 +1,12 @@
-import 'package:fox_iot/feature/home/domain/Home.dart';
+import 'package:fox_iot/feature/home/domain/FoxIoTHome.dart';
 
 abstract class IHomeRepo {
   Future<List<FoxIoTHome>> getHouses();
 
-  Future<bool> createHome();
+  Future<bool> createHome(String? homeName, String? location);
 
   Future<bool> createRoom();
 
   Future<FoxIoTHome> getSelectedHome();
+
 }
