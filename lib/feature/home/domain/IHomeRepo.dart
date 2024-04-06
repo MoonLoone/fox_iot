@@ -7,6 +7,6 @@ abstract class IHomeRepo {
 
   Future<bool> createRoom();
 
-  Future<FoxIoTHome> getSelectedHome();
+  Future<FoxIoTHome?> getSelectedHome();
 
 }

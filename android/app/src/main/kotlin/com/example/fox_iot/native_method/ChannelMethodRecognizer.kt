@@ -8,8 +8,11 @@ object ChannelMethodRecognizer {
         CreateHomeMethod.methodName -> CreateHomeMethod
         VerifyUserMethod.methodName -> VerifyUserMethod
         GetHomesMethod.methodName -> GetHomesMethod
+        ConnectAPDeviceMethod.methodName -> ConnectAPDeviceMethod
+        GetTokenMethod.methodName -> GetTokenMethod
+        GetDevicesMethod.methodName -> GetDevicesMethod
         else -> {
-            Log.e(methodName, "Undefined native method")
+            Log.e("!!!", "Undefined native method")
             null
         }
     }

@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fox_iot/feature/home/pres/create_home_page/CreateHomePage.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomeBloc.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomeState.dart';
+import 'package:fox_iot/feature/home/pres/home_page/components/HomeView.dart';
 import 'package:fox_iot/res/components/fox_iot_buttons.dart';
 import 'package:fox_iot/res/values/assets.dart';
 import 'package:fox_iot/res/values/theme.dart';
@@ -68,7 +69,7 @@ class HomePage extends StatelessWidget {
               SvgPicture.asset(safetyGetAsset(FoxIotAssetName.room).url,
                   width: 128, height: 128),
               const SizedBox(height: 32),
-              FoxIoTPrimaryButton(null, null, "Create house", () => addRoom())
+              FoxIoTPrimaryButton(btnText:  "Create house",onClick: () => addRoom())
             ],
           ))));
 
@@ -108,25 +109,25 @@ class HomePage extends StatelessWidget {
                   ]))),
           if (state.isSelectHome)
             Align(
-              alignment: Alignment.topLeft,
-              child:Padding(
-                padding: const EdgeInsets.only(left: 120, top: 56),
-                child: DropdownButton<String>(
-                value: state.currentHome?.name,
-                items: state.homes
-                    .map<DropdownMenuItem<String>>(
-                        (home) => DropdownMenuItem<String>(
-                              value: home.name,
-                              child: Text(home.name),
-                            ))
-                    .toList(),
-                onChanged: (String? value) {
-                  if (value != null) {
-                    changeHome(value);
-                  }
-                },
-              ),)
-            ),
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 120, top: 56),
+                  child: DropdownButton<String>(
+                    value: state.currentHome?.name,
+                    items: state.homes
+                        .map<DropdownMenuItem<String>>(
+                            (home) => DropdownMenuItem<String>(
+                                  value: home.name,
+                                  child: Text(home.name),
+                                ))
+                        .toList(),
+                    onChanged: (String? value) {
+                      if (value != null) {
+                        changeHome(value);
+                      }
+                    },
+                  ),
+                )),
           Align(
             alignment: Alignment.bottomRight,
             child: Padding(
@@ -147,7 +148,8 @@ class HomePage extends StatelessWidget {
                     ),
                   )),
             ),
-          )
+          ),
+          HomeView(state.currentHome?.rooms ?? List.empty())
         ],
       ),
     ));

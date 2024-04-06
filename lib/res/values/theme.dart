@@ -113,5 +113,11 @@ class FoxIotTheme {
         url: "${_BASE_ASSET_DIR}pencil.svg", size: sizes.primaryIconSize),
     FoxIotAssetName.home: FoxIoTAsset(
         url: "${_BASE_ASSET_DIR}home.svg", size: sizes.primaryIconSize),
+    FoxIotAssetName.backBtn: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}back.svg", size: sizes.primaryIconSize),
+    FoxIotAssetName.successBig: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}success_big.svg", size: sizes.primaryIconSize),
+    FoxIotAssetName.important: FoxIoTAsset(
+        url: "${_BASE_ASSET_DIR}important.svg", size: sizes.primaryIconSize),
   };
 }

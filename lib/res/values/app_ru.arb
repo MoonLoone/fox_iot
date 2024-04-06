@@ -23,5 +23,9 @@
   "exit": "Выйти",
   "or_connect_using": "Или зайти при помощи",
   "enter_your_bio": "Напишите о себе",
-  "enter_your_name": "Василий Пупкин"
+  "enter_your_name": "Василий Пупкин",
+  "sensor": "Датчик",
+  "bulb": "Умная лампочка",
+  "hub": "Zigbee-хаб",
+  "camera": "Камера"
 }

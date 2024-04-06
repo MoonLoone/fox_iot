@@ -116,10 +116,8 @@ class SignInPageState extends State<SignInPage> {
                             height: 24,
                           ),
                           FoxIoTPrimaryButton(
-                              null,
-                              null,
-                              S.of(context).signIn,
-                              () => signInBloc.add(SignInClick(
+                              btnText: S.of(context).signIn,
+                              onClick: () => signInBloc.add(SignInClick(
                                   email: emailController.text,
                                   password: passwordController.text,
                                   navigateWhenAuth: () {

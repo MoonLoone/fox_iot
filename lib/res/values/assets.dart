@@ -50,5 +50,8 @@ enum FoxIotAssetName {
   addRoom,
   room,
   pencil,
-  home
+  home,
+  backBtn,
+  successBig,
+  important
 }

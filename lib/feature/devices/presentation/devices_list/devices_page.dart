@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_iot/feature/devices/presentation/components/device_list_item.dart';
-import 'package:fox_iot/feature/devices/presentation/contracts/devices_actions.dart';
-import 'package:fox_iot/feature/devices/presentation/contracts/devices_state.dart';
-import 'package:fox_iot/feature/devices/presentation/devices_bloc.dart';
-import 'package:fox_iot/feature/hardware_adapters/bluetooth/presentation/bluetooth_devices_page.dart';
+import 'package:fox_iot/feature/devices/presentation/devices_list/devices_bloc.dart';
+import 'package:fox_iot/feature/devices/presentation/select_device_to_connect/SelectDeviceToConnectPage.dart';
 import 'package:fox_iot/res/components/background.dart';
 import 'package:fox_iot/res/components/fox_iot_buttons.dart';
 import 'package:fox_iot/res/values/assets.dart';
 import 'package:fox_iot/res/values/theme.dart';
 
-import '../../../res/components/navbar/navbar.dart';
-import '../../../res/components/navbar/navbar_states.dart';
-import '../../../res/values/s.dart';
+import '../../../../res/components/navbar/navbar.dart';
+import '../../../../res/components/navbar/navbar_states.dart';
+import '../../../../res/values/s.dart';
+import 'components/device_list_item.dart';
+import 'contracts/devices_actions.dart';
+import 'contracts/devices_state.dart';
 
 class DevicesPage extends StatefulWidget {
   static const String navId = "devices_page";
@@ -60,11 +60,9 @@ class _DevicesPageState extends State<DevicesPage> {
                               height: 32,
                             ),
                             FoxIoTPrimaryButton(
-                                null,
-                                null,
-                                S.of(context).add_device,
-                                () => Navigator.pushNamed(
-                                    context, BlueDevicesPage.navId))
+                                btnText: S.of(context).add_device,
+                                onClick: () => Navigator.pushNamed(
+                                    context, SelectDeviceToConnectPage.navId))
                           ]),
                     ])),
             Expanded(

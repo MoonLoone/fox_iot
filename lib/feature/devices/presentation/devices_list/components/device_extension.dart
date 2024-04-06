@@ -11,7 +11,7 @@ extension DevicePresentation on Device {
         return FoxIotAssetName.bulb;
       case DeviceType.sensor:
         return null;
-      case DeviceType.undefined:
+      case DeviceType.camera:
         return null;
     }
   }

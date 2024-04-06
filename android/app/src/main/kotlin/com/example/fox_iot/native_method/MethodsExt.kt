@@ -10,5 +10,20 @@ fun MethodCall.toCreateHomeMap() = mapOf(
     CreateHomeMethod.LOCATION to argument<String>(CreateHomeMethod.LOCATION),
 )
 
+fun MethodCall.toConnectAPDeviceMap() = mapOf(
+    ConnectAPDeviceMethod.HOME_ID to argument<String>(ConnectAPDeviceMethod.HOME_ID),
+    ConnectAPDeviceMethod.WIFI_NAME to argument<String>(ConnectAPDeviceMethod.WIFI_NAME),
+    ConnectAPDeviceMethod.PASSWORD to argument<String>(ConnectAPDeviceMethod.PASSWORD),
+    ConnectAPDeviceMethod.TOKEN to argument<String>(ConnectAPDeviceMethod.TOKEN)
+)
+
+fun MethodCall.toGetDevicesMap() = mapOf(
+    ConnectAPDeviceMethod.HOME_ID to argument<String>(ConnectAPDeviceMethod.HOME_ID),
+)
+
+fun MethodCall.toGetTokenMap() = mapOf(
+    GetTokenMethod.HOME_ID to argument<String>(ConnectAPDeviceMethod.HOME_ID),
+)
+
 fun HomeBean.toDomain() =
-    NativeHome(name = this.name, rooms = rooms.map { NativeRoom(name = it.name) })
+    NativeHome(name = this.name, rooms = rooms.map { NativeRoom(name = it.name) }, id = this.homeId)

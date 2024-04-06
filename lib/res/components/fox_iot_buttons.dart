@@ -10,8 +10,8 @@ class FoxIoTPrimaryButton extends StatelessWidget {
   final Function() onClick;
 
   const FoxIoTPrimaryButton(
-      this.leadingItem, this.trailingItem, this.btnText, this.onClick,
-      {super.key});
+      {this.leadingItem, this.trailingItem, this.btnText, required this.onClick,
+      super.key});
 
   @override
   Widget build(BuildContext context) {

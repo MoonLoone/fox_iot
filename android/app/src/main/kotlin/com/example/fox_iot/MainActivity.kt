@@ -1,10 +1,16 @@
 package com.example.fox_iot
 
 import com.example.fox_iot.native_method.ChannelMethodRecognizer
+import com.example.fox_iot.native_method.ConnectAPDeviceMethod
 import com.example.fox_iot.native_method.CreateHomeMethod
+import com.example.fox_iot.native_method.GetDevicesMethod
 import com.example.fox_iot.native_method.GetHomesMethod
+import com.example.fox_iot.native_method.GetTokenMethod
 import com.example.fox_iot.native_method.VerifyUserMethod
+import com.example.fox_iot.native_method.toConnectAPDeviceMap
 import com.example.fox_iot.native_method.toCreateHomeMap
+import com.example.fox_iot.native_method.toGetDevicesMap
+import com.example.fox_iot.native_method.toGetTokenMap
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
@@ -29,7 +35,24 @@ class MainActivity : FlutterActivity() {
                     result.success(it)
                 }
 
+                ConnectAPDeviceMethod -> (method as ConnectAPDeviceMethod).methodInvokeWithContext(
+                    call.toConnectAPDeviceMap(),
+                    {
+                        result.success(it)
+                    },
+                    this
+                )
+
                 null -> result.notImplemented()
+
+                GetTokenMethod -> method.methodInvoke(call.toGetTokenMap()) {
+                    result.success(it)
+                }
+
+                GetDevicesMethod ->method.methodInvoke(call.toGetDevicesMap()){
+                    result.success(it)
+                }
+
             }
         }
     }

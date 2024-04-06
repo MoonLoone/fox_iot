@@ -14,8 +14,13 @@ class HomePageBloc extends Bloc<IFoxIoTActions, HomeState> {
     {
       on<OnInit>((event, emit) async {
         emit(state.updateState(loadingState: const Loading()));
-        await homeRepo.getHouses().then((value) => emit(
-            state.updateState(homes: value, loadingState: const NotLoading())));
+        await homeRepo
+            .getHouses()
+            .then((value) => emit(state.updateState(homes: value)));
+        await homeRepo
+            .getSelectedHome()
+            .then((value) => emit(state.updateState(currentHome: value)));
+        emit(state.updateState(loadingState: const NotLoading()));
       });
       on<OnChangeHomeClick>((event, emit) =>
           emit(state.updateState(isSelectHome: !state.isSelectHome)));

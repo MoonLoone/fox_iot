@@ -4,7 +4,7 @@ class Device {
   late String name;
   late DeviceType deviceType;
 
-  Device({this.name = "", this.deviceType = DeviceType.undefined});
+  Device({this.name = "", required this.deviceType});
 
   @override
   String toString() {

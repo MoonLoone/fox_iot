@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../utils/models/LoadingState.dart';
-import '../../domain/models/Device.dart';
+import '../../../../../utils/models/LoadingState.dart';
+import '../../../domain/models/Device.dart';
+
 
 @immutable
 class DevicesState {

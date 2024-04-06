@@ -7,6 +7,12 @@ import 'package:fox_iot/di/Singleton.dart';
 import 'package:fox_iot/feature/account/account_page.dart';
 import 'package:fox_iot/feature/auth/presentation/main_info_page/MainInfoPage.dart';
 import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpBloc.dart';
+import 'package:fox_iot/feature/devices/presentation/connect_with_ap/ConnectAPActions.dart';
+import 'package:fox_iot/feature/devices/presentation/connect_with_ap/ConnectAPBloc.dart';
+import 'package:fox_iot/feature/devices/presentation/connect_with_ap/ConnectWithApPage.dart';
+import 'package:fox_iot/feature/devices/presentation/get_token/GetTokenBloc.dart';
+import 'package:fox_iot/feature/devices/presentation/get_token/GetTokenPage.dart';
+import 'package:fox_iot/feature/devices/presentation/select_device_to_connect/SelectDeviceToConnectPage.dart';
 import 'package:fox_iot/feature/home/pres/create_home_page/CreateHomeBloc.dart';
 import 'package:fox_iot/feature/home/pres/create_home_page/CreateHomePage.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomeBloc.dart';
@@ -22,10 +28,8 @@ import 'feature/auth/presentation/main_info_page/MainInfoBloc.dart';
 import 'feature/auth/presentation/sign_in_page/SignInBloc.dart';
 import 'feature/auth/presentation/sign_in_page/SignInPage.dart';
 import 'feature/auth/presentation/sign_up_page/SignUpPage.dart';
-import 'feature/devices/presentation/devices_bloc.dart';
-import 'feature/devices/presentation/devices_page.dart';
-import 'feature/hardware_adapters/bluetooth/presentation/bluetooth_devices_bloc.dart';
-import 'feature/hardware_adapters/bluetooth/presentation/bluetooth_devices_page.dart';
+import 'feature/devices/presentation/devices_list/devices_bloc.dart';
+import 'feature/devices/presentation/devices_list/devices_page.dart';
 import 'firebase_options.dart';
 import 'local_storage/data/hive/initialization.dart';
 import 'local_storage/domain/models/FoxIoTUser.dart';
@@ -56,11 +60,13 @@ class FoxIoTApp extends StatelessWidget {
       home: _getStartWidget(currentUser),
       routes: {
         WelcomePage.navId: (context) => const WelcomePage(),
+        SelectDeviceToConnectPage.navId: (context) =>
+            SelectDeviceToConnectPage(),
         HomePage.navId: (context) => BlocProvider(
-          create: (_) => HomePageBloc()..add(OnInit()),
-          lazy: true,
-          child: HomePage(),
-        ),
+              create: (_) => HomePageBloc()..add(OnInit()),
+              lazy: true,
+              child: HomePage(),
+            ),
         RulesPage.navId: (context) => RulesPage(),
         AccountPage.navId: (context) => const AccountPage(),
         SignInPage.navId: (context) => BlocProvider(
@@ -77,21 +83,27 @@ class FoxIoTApp extends StatelessWidget {
               lazy: true,
               child: const DevicesPage(),
             ),
-        BlueDevicesPage.navId: (context) => BlocProvider(
-              create: (context) => BluetoothDevicesBloc(),
+        GetTokenPage.navId: (context) => BlocProvider(
+              create: (context) => GetTokenBloc()..add(OnInit()),
               lazy: true,
-              child: const BlueDevicesPage(),
+              child: GetTokenPage(),
             ),
         MainInfoPage.navId: (context) => BlocProvider(
-          create: (context) => MainInfoBloc(),
-          lazy: true,
-          child: MainInfoPage(),
-        ),
+              create: (context) => MainInfoBloc(),
+              lazy: true,
+              child: MainInfoPage(),
+            ),
         CreateHomePage.navId: (context) => BlocProvider(
-          create: (context) => CreateHomeBloc(),
-          lazy: true,
-          child: CreateHomePage(),
-        ),
+              create: (context) => CreateHomeBloc(),
+              lazy: true,
+              child: CreateHomePage(),
+            ),
+        ConnectWithApPage.navId: (context) => BlocProvider(
+              create: (context) => ConnectAPBloc(),
+              lazy: true,
+              child: ConnectWithApPage(
+                  ModalRoute.of(context)!.settings.arguments.toString()),
+            ),
       },
     );
   }
