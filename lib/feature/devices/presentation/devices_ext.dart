@@ -12,9 +12,13 @@ FoxIotAssetName? getDeviceAssetName(DeviceType deviceType) {
       return FoxIotAssetName.hub;
     case DeviceType.bulb:
       return FoxIotAssetName.bulb;
-    case DeviceType.sensor:
-      return null;
     case DeviceType.camera:
+      return null;
+    case DeviceType.unknown:
+      return FoxIotAssetName.undefined;
+    case DeviceType.thermal:
+      return null;
+    case DeviceType.motion:
       return null;
   }
 }
@@ -27,6 +31,12 @@ FoxIotAssetName? getConnectType(DeviceConnectingType deviceConnectingTypeItem) {
       return FoxIotAssetName.bulb;
     case DeviceConnectingType.cameraConnectUrl:
       return null;
+    case DeviceConnectingType.thermostatZigbee:
+      return null;
+    case DeviceConnectingType.socketZigbee:
+      return null;
+    case DeviceConnectingType.motionSensorZigbee:
+      return null;
   }
 }
 
@@ -36,10 +46,14 @@ String getDeviceNameByType(BuildContext context, DeviceType deviceType) {
       return S.of(context).hub;
     case DeviceType.bulb:
       return S.of(context).bulb;
-    case DeviceType.sensor:
-      return S.of(context).sensor;
     case DeviceType.camera:
       return S.of(context).camera;
+    case DeviceType.unknown:
+      return "Unknown";
+    case DeviceType.thermal:
+      return "Thermal";
+    case DeviceType.motion:
+      return "Motion";
   }
 }
 
@@ -52,6 +66,12 @@ String getConnectDeviceName(
       return S.of(context).hub;
     case DeviceConnectingType.bulbConnectAP:
       return S.of(context).bulb;
+    case DeviceConnectingType.thermostatZigbee:
+      return "Zigbee";
+    case DeviceConnectingType.socketZigbee:
+      return "Zigbee";
+    case DeviceConnectingType.motionSensorZigbee:
+      return "Zigbee";
   }
 }
 
@@ -64,5 +84,11 @@ String getConnectDeviceDescription(
       return "Connect using AP";
     case DeviceConnectingType.bulbConnectAP:
       return "Connect using AP";
+    case DeviceConnectingType.thermostatZigbee:
+      return "Connect with zigbee hub";
+    case DeviceConnectingType.socketZigbee:
+      return "Connect with zigbee hub";
+    case DeviceConnectingType.motionSensorZigbee:
+      return "Connect with zigbee hub";
   }
 }

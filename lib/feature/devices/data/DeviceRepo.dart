@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 import 'package:fox_iot/feature/devices/domain/IDeviceRepo.dart';
 import 'package:fox_iot/feature/devices/domain/models/Device.dart';
@@ -12,12 +14,11 @@ class DeviceRepo extends IDeviceRepo {
 
   @override
   Future<List<Device>> getUserDevices() async {
-    return [
-      Device(name: "My Light Bulb", deviceType: DeviceType.bulb),
-      Device(name: "My Light Bulb2", deviceType: DeviceType.bulb),
-      Device(name: "My Hub", deviceType: DeviceType.hub),
-      Device(name: "My Thermal Sensor", deviceType: DeviceType.sensor),
-    ];
+    final homeId = (await _homeDb.getCurrentHome())?.id;
+    final String devicesString = await channel
+        .invokeMethod("get_devices", {"home_id": homeId.toString()});
+    final List<dynamic> devicesJson = jsonDecode(devicesString);
+    return devicesJson.map((device) => Device.fromMap(device)).toList();
   }
 
   @override
@@ -31,7 +32,6 @@ class DeviceRepo extends IDeviceRepo {
     final homeId = (await _homeDb.getCurrentHome())?.id;
     final wifi = "MTS_GPON_8f91c0";
     final password = "19661966";
-    print("Token in repo "+ token);
     return channel.invokeMethod("connect_using_ap", {
       "token": token,
       "home_id": homeId.toString(),
@@ -39,4 +39,30 @@ class DeviceRepo extends IDeviceRepo {
       "wifi_password": password
     });
   }
+
+  @override
+  Future connectZigbeeSub(String hubId) {
+    return channel.invokeMethod("connect_zigbee", {"hub_id": hubId});
+  }
+
+  @override
+  Future<List<Device>> getGWS() async {
+    final devices = await getUserDevices();
+    return devices
+        .where((element) => element.deviceType == DeviceType.hub)
+        .toList();
+  }
+
+  @override
+  Future getThermalData(String deviceId) async {
+    return await channel
+        .invokeMethod("get_device_data", {"devId": deviceId, "device_type": DeviceType.thermal.name});
+  }
+
+  @override
+  Future<bool> saveCameraUrl(String cameraUrl) {
+    // TODO: implement saveCameraUrl
+    throw UnimplementedError();
+  }
+
 }

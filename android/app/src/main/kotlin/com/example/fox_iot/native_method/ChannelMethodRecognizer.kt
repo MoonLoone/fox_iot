@@ -11,6 +11,7 @@ object ChannelMethodRecognizer {
         ConnectAPDeviceMethod.methodName -> ConnectAPDeviceMethod
         GetTokenMethod.methodName -> GetTokenMethod
         GetDevicesMethod.methodName -> GetDevicesMethod
+        ConnectZigbeeDevice.methodName -> ConnectZigbeeDevice
         else -> {
             Log.e("!!!", "Undefined native method")
             null

@@ -15,3 +15,7 @@ class LoadingError extends LoadingState {
 class NotLoading extends LoadingState{
   const NotLoading();
 }
+
+class SuccessLoading extends LoadingState{
+  const SuccessLoading();
+}

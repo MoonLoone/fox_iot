@@ -1,8 +1,10 @@
 package com.example.fox_iot.native_method
 
+import com.example.fox_iot.native_method.models.NativeDevice
 import com.example.fox_iot.native_method.models.NativeHome
 import com.example.fox_iot.native_method.models.NativeRoom
 import com.thingclips.smart.home.sdk.bean.HomeBean
+import com.thingclips.smart.sdk.bean.DeviceBean
 import io.flutter.plugin.common.MethodCall
 
 fun MethodCall.toCreateHomeMap() = mapOf(
@@ -18,12 +20,25 @@ fun MethodCall.toConnectAPDeviceMap() = mapOf(
 )
 
 fun MethodCall.toGetDevicesMap() = mapOf(
-    ConnectAPDeviceMethod.HOME_ID to argument<String>(ConnectAPDeviceMethod.HOME_ID),
+    GetDevicesMethod.HOME_ID to argument<String>(GetDevicesMethod.HOME_ID),
+)
+
+fun MethodCall.toConnectZigbee() = mapOf(
+    ConnectZigbeeDevice.HUB_ID to argument<String>(ConnectZigbeeDevice.HUB_ID),
 )
 
 fun MethodCall.toGetTokenMap() = mapOf(
     GetTokenMethod.HOME_ID to argument<String>(ConnectAPDeviceMethod.HOME_ID),
 )
 
+fun MethodCall.toGetDeviceData() = mapOf(
+    GetDeviceData.DEVICE_ID to argument<String>(GetDeviceData.DEVICE_ID),
+    GetDeviceData.DEVICE_TYPE to argument<String>(GetDeviceData.DEVICE_TYPE),
+)
+
 fun HomeBean.toDomain() =
     NativeHome(name = this.name, rooms = rooms.map { NativeRoom(name = it.name) }, id = this.homeId)
+
+fun DeviceBean.toDomain() = NativeDevice(name = name, id = devId, type = productBean.category.toString())
+
+

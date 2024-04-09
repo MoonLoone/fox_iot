@@ -1,6 +1,9 @@
 package com.example.fox_iot.native_method
 
 import android.util.Log
+import com.example.fox_iot.native_method.models.NativeDevice
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.thingclips.smart.home.sdk.ThingHomeSdk
 import com.thingclips.smart.home.sdk.bean.HomeBean
 import com.thingclips.smart.home.sdk.callback.IThingHomeResultCallback
@@ -12,8 +15,11 @@ object GetDevicesMethod : IFoxIoTNativeMethod {
     override fun methodInvoke(args: Map<String, String?>, callback: (String) -> Unit) {
         val homeId = args[HOME_ID]?.toLong()!!
         ThingHomeSdk.newHomeInstance(homeId).getHomeDetail(object : IThingHomeResultCallback {
+
             override fun onSuccess(bean: HomeBean?) {
-                callback.invoke(bean?.deviceList.toString())
+                val domainList = bean?.deviceList?.map { it.toDomain() }
+                val type = object : TypeToken<List<NativeDevice>>() {}.type
+                callback(Gson().toJson(domainList, type) )
             }
 
             override fun onError(errorCode: String?, errorMsg: String?) {

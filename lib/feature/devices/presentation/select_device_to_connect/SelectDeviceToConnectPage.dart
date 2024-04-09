@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fox_iot/feature/devices/domain/models/Device.dart';
 import 'package:fox_iot/feature/devices/domain/models/DeviceType.dart';
+import 'package:fox_iot/feature/devices/presentation/connect_zigbee_sub/ConnectZigbeePage.dart';
 import 'package:fox_iot/feature/devices/presentation/devices_ext.dart';
 import 'package:fox_iot/feature/devices/presentation/devices_list/components/device_list_item.dart';
 import 'package:fox_iot/feature/devices/presentation/get_token/GetTokenPage.dart';
@@ -51,11 +52,30 @@ class SelectDeviceToConnectPage extends StatelessWidget {
               itemCount: deviceTypes.length,
               itemBuilder: (context, index) {
                 return InkWell(
-                  child: DeviceConnectingTypeItem(deviceTypes[index]),
-                  onTap: () => Navigator.pushNamed(context, GetTokenPage.navId,
-                      arguments: deviceTypes[index]),
-                );
+                    onTap: getFunctionForConnectingType(
+                        deviceTypes[index], context),
+                    child: DeviceConnectingTypeItem(deviceTypes[index]));
               }),
         )))));
+  }
+}
+
+Function() getFunctionForConnectingType(
+    DeviceConnectingType type, BuildContext context) {
+  switch (type) {
+    case DeviceConnectingType.cameraConnectUrl:
+      return () => {};
+    case DeviceConnectingType.hubConnectAP:
+      return () =>
+          Navigator.pushNamed(context, GetTokenPage.navId, arguments: type);
+    case DeviceConnectingType.bulbConnectAP:
+      return () =>
+          Navigator.pushNamed(context, GetTokenPage.navId, arguments: type);
+    case DeviceConnectingType.thermostatZigbee:
+      return () => Navigator.pushNamed(context, ConnectZigbeePage.navId);
+    case DeviceConnectingType.socketZigbee:
+      return () => Navigator.pushNamed(context, ConnectZigbeePage.navId);
+    case DeviceConnectingType.motionSensorZigbee:
+      return () => Navigator.pushNamed(context, ConnectZigbeePage.navId);
   }
 }

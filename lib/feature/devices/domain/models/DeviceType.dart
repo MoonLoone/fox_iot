@@ -2,6 +2,8 @@
 enum DeviceType{
   hub,
   bulb,
-  sensor,
-  camera
+  thermal,
+  motion,
+  camera,
+  unknown
 }

@@ -10,9 +10,13 @@ import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpBloc.dart';
 import 'package:fox_iot/feature/devices/presentation/connect_with_ap/ConnectAPActions.dart';
 import 'package:fox_iot/feature/devices/presentation/connect_with_ap/ConnectAPBloc.dart';
 import 'package:fox_iot/feature/devices/presentation/connect_with_ap/ConnectWithApPage.dart';
+import 'package:fox_iot/feature/devices/presentation/connect_zigbee_sub/ConnectZigbeeActions.dart';
+import 'package:fox_iot/feature/devices/presentation/connect_zigbee_sub/ConnectZigbeeBloc.dart';
+import 'package:fox_iot/feature/devices/presentation/connect_zigbee_sub/ConnectZigbeePage.dart';
 import 'package:fox_iot/feature/devices/presentation/get_token/GetTokenBloc.dart';
 import 'package:fox_iot/feature/devices/presentation/get_token/GetTokenPage.dart';
 import 'package:fox_iot/feature/devices/presentation/select_device_to_connect/SelectDeviceToConnectPage.dart';
+import 'package:fox_iot/feature/devices/presentation/thermo_screen/ThermoPage.dart';
 import 'package:fox_iot/feature/home/pres/create_home_page/CreateHomeBloc.dart';
 import 'package:fox_iot/feature/home/pres/create_home_page/CreateHomePage.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomeBloc.dart';
@@ -79,9 +83,9 @@ class FoxIoTApp extends StatelessWidget {
               child: SignUpPage(),
             ),
         DevicesPage.navId: (context) => BlocProvider(
-              create: (context) => DevicesBloc(),
+              create: (context) => DevicesBloc()..add(OnInit()),
               lazy: true,
-              child: const DevicesPage(),
+              child: DevicesPage(),
             ),
         GetTokenPage.navId: (context) => BlocProvider(
               create: (context) => GetTokenBloc()..add(OnInit()),
@@ -104,6 +108,13 @@ class FoxIoTApp extends StatelessWidget {
               child: ConnectWithApPage(
                   ModalRoute.of(context)!.settings.arguments.toString()),
             ),
+        ConnectZigbeePage.navId: (context) => BlocProvider(
+              create: (context) => ConnectZigbeeBloc()..add(OnInit()),
+              lazy: true,
+              child: ConnectZigbeePage(),
+            ),
+        ThermoPage.navId: (context) =>
+            ThermoPage(ModalRoute.of(context)!.settings.arguments.toString()),
       },
     );
   }

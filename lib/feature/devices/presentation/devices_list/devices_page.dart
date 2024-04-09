@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fox_iot/feature/devices/presentation/devices_list/components/device_extension.dart';
 import 'package:fox_iot/feature/devices/presentation/devices_list/devices_bloc.dart';
 import 'package:fox_iot/feature/devices/presentation/select_device_to_connect/SelectDeviceToConnectPage.dart';
 import 'package:fox_iot/res/components/background.dart';
@@ -14,16 +15,9 @@ import 'components/device_list_item.dart';
 import 'contracts/devices_actions.dart';
 import 'contracts/devices_state.dart';
 
-class DevicesPage extends StatefulWidget {
+class DevicesPage extends StatelessWidget {
   static const String navId = "devices_page";
 
-  const DevicesPage({super.key});
-
-  @override
-  State<StatefulWidget> createState() => _DevicesPageState();
-}
-
-class _DevicesPageState extends State<DevicesPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DevicesBloc, DevicesState>(builder: (context, state) {
@@ -71,7 +65,9 @@ class _DevicesPageState extends State<DevicesPage> {
                     padding: const EdgeInsets.only(top: 16),
                     child: ListView.builder(
                       itemBuilder: (context, index) {
-                        return DeviceListItem(state.devices[index]);
+                        return InkWell(
+                            onTap: getFunctionToDeviceNavigate(state.devices[index], context),
+                            child: DeviceListItem(state.devices[index]));
                       },
                       itemCount: state.devices.length,
                     )))
@@ -79,11 +75,5 @@ class _DevicesPageState extends State<DevicesPage> {
         ),
       ));
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<DevicesBloc>(context).add(LoadDevices());
   }
 }

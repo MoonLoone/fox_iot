@@ -27,6 +27,7 @@ dependencies:
   flutter_svg: ^0.22.0
   fluttertoast: ^8.0.8
   flutter_layout_grid: ^2.0.0
+  event_bloc: ^4.6.0
 
 
 provider:

@@ -2,5 +2,8 @@
 enum DeviceConnectingType{
   cameraConnectUrl,
   hubConnectAP,
-  bulbConnectAP
+  bulbConnectAP,
+  thermostatZigbee,
+  socketZigbee,
+  motionSensorZigbee
 }

@@ -16,7 +16,6 @@ class FoxIoTPrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 240,
         child: TextButton(
             onPressed: () {
               onClick();
@@ -36,7 +35,7 @@ class FoxIoTPrimaryButton extends StatelessWidget {
                   style: FoxIotTheme.textStyles.h4
                       .copyWith(color: FoxIotTheme.colors.onThird),
                 ),
-                if (leadingItem != null) leadingItem!
+                //if (leadingItem != null) leadingItem!
               ],
             )));
   }
