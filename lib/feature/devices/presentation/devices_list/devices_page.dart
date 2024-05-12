@@ -12,12 +12,16 @@ import '../../../../res/components/navbar/navbar.dart';
 import '../../../../res/components/navbar/navbar_states.dart';
 import '../../../../res/values/s.dart';
 import 'components/device_list_item.dart';
-import 'contracts/devices_actions.dart';
 import 'contracts/devices_state.dart';
 
-class DevicesPage extends StatelessWidget {
+class DevicesPage extends StatefulWidget {
   static const String navId = "devices_page";
 
+  @override
+  State<StatefulWidget> createState() => _DevicesPageState();
+}
+
+class _DevicesPageState extends State<DevicesPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DevicesBloc, DevicesState>(builder: (context, state) {
@@ -66,7 +70,8 @@ class DevicesPage extends StatelessWidget {
                     child: ListView.builder(
                       itemBuilder: (context, index) {
                         return InkWell(
-                            onTap: getFunctionToDeviceNavigate(state.devices[index], context),
+                            onTap: getFunctionToDeviceNavigate(
+                                state.devices[index], context),
                             child: DeviceListItem(state.devices[index]));
                       },
                       itemCount: state.devices.length,

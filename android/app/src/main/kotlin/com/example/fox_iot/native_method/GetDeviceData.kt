@@ -4,7 +4,10 @@ import android.util.Log
 import com.example.fox_iot.native_method.models.DeviceInfoDTOType
 import com.google.gson.Gson
 import com.thingclips.smart.home.sdk.ThingHomeSdk
+import com.thingclips.smart.home.sdk.bean.HomeBean
+import com.thingclips.smart.home.sdk.callback.IThingHomeResultCallback
 import com.thingclips.smart.sdk.api.IDeviceListener
+import io.flutter.plugin.common.MethodCall
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,43 +16,25 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
-object GetDeviceData {
-
-    const val DEVICE_ID = "devId"
-    const val DEVICE_TYPE = "device_type"
+class GetDeviceData {
 
     private val _infoFlow: MutableStateFlow<String> = MutableStateFlow("")
     val infoFlow: StateFlow<String> = _infoFlow
 
-    /*override val methodName: String = "get_device_data"
+    fun startFlow(deviceId: String, deviceType: DeviceInfoDTOType, homeId: Long) {
 
-    const val DEVICE_ID = "devId"
-    const val DEVICE_TYPE = "device_type"
-
-    override fun methodInvoke(args: Map<String, String?>, callback: (String) -> Unit) {
-        val deviceId = args[DEVICE_ID];
-        val deviceType = DeviceInfoDTOType.values().first { it.externalName == args[DEVICE_TYPE] }
-        ThingHomeSdk.newDeviceInstance(deviceId).registerDeviceListener(object : IDeviceListener {
-
-            override fun onDpUpdate(devId: String?, dpStr: MutableMap<String, Any>?) {
-                val dataMap = dpStr?.filterKeys { deviceType.dpKeys.contains(it) }
-                val jsonData = Gson().toJson(dataMap)
-                if (dataMap?.isNotEmpty() == true) callback(jsonData)
+        ThingHomeSdk.newHomeInstance(homeId).getHomeDetail(object : IThingHomeResultCallback {
+            override fun onSuccess(bean: HomeBean?) {
+                val dps = bean?.deviceList?.firstOrNull { it.devId == deviceId }?.getDps().toString()
+                Log.d("?!", "Succes dps for device $deviceId: $dps")
             }
 
-            override fun onRemoved(devId: String?) {}
-
-            override fun onStatusChanged(devId: String?, online: Boolean) {
+            override fun onError(errorCode: String?, errorMsg: String?) {
+                Log.d("?!", "Error dps for device $deviceId: $errorCode $errorMsg")
             }
-
-            override fun onNetworkStatusChanged(devId: String?, status: Boolean) {}
-
-            override fun onDevInfoUpdate(devId: String?) {}
 
         })
-    }*/
 
-    fun startFlow(deviceId: String, deviceType: DeviceInfoDTOType) {
         ThingHomeSdk.newDeviceInstance(deviceId).registerDeviceListener(object : IDeviceListener {
 
             override fun onDpUpdate(devId: String?, dpStr: MutableMap<String, Any>?) {
@@ -69,6 +54,22 @@ object GetDeviceData {
             override fun onDevInfoUpdate(devId: String?) {}
 
         })
+    }
+
+    companion object : IFoxIoTNativeMethod {
+
+        override val methodName: String = "get_device_data"
+
+        const val DEVICE_ID = "devId"
+        const val DEVICE_TYPE = "device_type"
+        const val HOME_ID = "home_id"
+
+        fun MethodCall.toGetDeviceData() = mapOf(
+                DEVICE_ID to argument<String>(DEVICE_ID),
+                DEVICE_TYPE to argument<String>(DEVICE_TYPE),
+                HOME_ID to argument<String>(HOME_ID),
+        )
+
     }
 
 }

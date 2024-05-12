@@ -6,14 +6,11 @@ import com.thingclips.smart.home.sdk.builder.ThingGwActivatorBuilder
 import com.thingclips.smart.home.sdk.builder.ThingGwSubDevActivatorBuilder
 import com.thingclips.smart.sdk.api.IThingSmartActivatorListener
 import com.thingclips.smart.sdk.bean.DeviceBean
+import io.flutter.plugin.common.MethodCall
 
-object ConnectZigbeeDevice : IFoxIoTNativeMethod {
+class ConnectZigbeeDevice {
 
-    const val HUB_ID = "hub_id"
-
-    override val methodName: String = "connect_zigbee"
-
-    override fun methodInvoke(args: Map<String, String?>, callback: (String) -> Unit) {
+    fun methodInvoke(args: Map<String, String?>, callback: (String) -> Unit) {
         val hubId = args[HUB_ID]
         val activatorBuilder = ThingGwSubDevActivatorBuilder()
             .setDevId(hubId)
@@ -34,4 +31,16 @@ object ConnectZigbeeDevice : IFoxIoTNativeMethod {
             })
         ThingHomeSdk.getActivatorInstance().newGwSubDevActivator(activatorBuilder).start()
     }
+
+    companion object: IFoxIoTNativeMethod{
+        override val methodName: String = "connect_zigbee"
+
+        const val HUB_ID = "hub_id"
+
+        fun MethodCall.toConnectZigbee() = mapOf(
+                HUB_ID to argument<String>(HUB_ID),
+        )
+
+    }
+
 }

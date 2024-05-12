@@ -7,10 +7,12 @@ import 'package:fox_iot/di/Singleton.dart';
 import 'package:fox_iot/feature/account/account_page.dart';
 import 'package:fox_iot/feature/auth/presentation/main_info_page/MainInfoPage.dart';
 import 'package:fox_iot/feature/auth/presentation/sign_up_page/SignUpBloc.dart';
-import 'package:fox_iot/feature/devices/presentation/connect_with_ap/ConnectAPActions.dart';
+import 'package:fox_iot/feature/devices/presentation/bulb_screen/BulbPage.dart';
+import 'package:fox_iot/feature/devices/presentation/bulb_screen/BulbPageBloc.dart';
+import 'package:fox_iot/feature/devices/presentation/camera_screen/CameraPage.dart';
+import 'package:fox_iot/feature/devices/presentation/camera_screen/ConnectCameraPage.dart';
 import 'package:fox_iot/feature/devices/presentation/connect_with_ap/ConnectAPBloc.dart';
 import 'package:fox_iot/feature/devices/presentation/connect_with_ap/ConnectWithApPage.dart';
-import 'package:fox_iot/feature/devices/presentation/connect_zigbee_sub/ConnectZigbeeActions.dart';
 import 'package:fox_iot/feature/devices/presentation/connect_zigbee_sub/ConnectZigbeeBloc.dart';
 import 'package:fox_iot/feature/devices/presentation/connect_zigbee_sub/ConnectZigbeePage.dart';
 import 'package:fox_iot/feature/devices/presentation/get_token/GetTokenBloc.dart';
@@ -113,15 +115,22 @@ class FoxIoTApp extends StatelessWidget {
               lazy: true,
               child: ConnectZigbeePage(),
             ),
+        ConnectCameraPage.navId: (context) => ConnectCameraPage(),
+        CameraPage.navId: (context) =>
+            CameraPage(ModalRoute.of(context)!.settings.arguments.toString()),
         ThermoPage.navId: (context) =>
             ThermoPage(ModalRoute.of(context)!.settings.arguments.toString()),
+        BulbPage.navId: (context) => BlocProvider(
+              create: (context) => BulbPageBloc(),
+              lazy: true,
+              child: BulbPage(),
+            ),
       },
     );
   }
 
   Widget _getStartWidget(FoxIoTUser? currentUser) {
     if (currentUser == null) return const WelcomePage();
-    //TODO navigate to main page
     return BlocProvider(
       create: (context) => HomePageBloc()..add(OnInit()),
       lazy: true,

@@ -7,13 +7,15 @@ import 'package:get_it/get_it.dart';
 import '../../domain/IDeviceRepo.dart';
 
 class ConnectAPBloc extends Bloc<IFoxIoTActions, ConnectAPState> {
-
   final IDeviceRepo repo = GetIt.I.get<IDeviceRepo>();
 
   ConnectAPBloc() : super(InitialState()) {
     {
       on<OnInitWithToken>((event, emit) async {
-        repo.connectUsingAP(event.token).then((value) => print(value.toString()));
+        emit(state.updateState(token: event.token));
+      });
+      on<ConnectClick>((event, emit) async {
+        repo.connectUsingAP(state.token, event.wifiPassword, event.wifiName);
       });
     }
   }

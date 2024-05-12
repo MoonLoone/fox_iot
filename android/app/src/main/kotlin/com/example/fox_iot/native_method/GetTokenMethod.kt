@@ -3,15 +3,15 @@ package com.example.fox_iot.native_method
 import android.util.Log
 import com.thingclips.smart.home.sdk.ThingHomeSdk
 import com.thingclips.smart.sdk.api.IThingActivatorGetToken
+import io.flutter.plugin.common.MethodCall
 
-object GetTokenMethod : IFoxIoTNativeMethod {
-    override val methodName: String = "get_token"
-    const val HOME_ID = "home_id"
+class GetTokenMethod {
+
     private val activator = ThingHomeSdk.getActivatorInstance()
 
-    override fun methodInvoke(args: Map<String, String?>, callback: (String) -> Unit) {
+    fun methodInvoke(args: Map<String, String?>, callback: (String) -> Unit) {
         val homeId =
-            args[ConnectAPDeviceMethod.HOME_ID]?.toLong() ?: throw Exception("Home cant be null")
+            args[HOME_ID]?.toLong() ?: throw Exception("Home cant be null")
         activator.getActivatorToken(homeId,
             object : IThingActivatorGetToken {
                 override fun onSuccess(token: String?) {
@@ -23,6 +23,16 @@ object GetTokenMethod : IFoxIoTNativeMethod {
                     Log.e("!!!", errorCode + errorMsg)
                 }
             })
+    }
+
+    companion object:IFoxIoTNativeMethod{
+        override val methodName: String = "get_token"
+        const val HOME_ID = "home_id"
+
+        fun MethodCall.toGetTokenMap() = mapOf(
+                HOME_ID to argument<String>(HOME_ID),
+        )
+
     }
 
 }

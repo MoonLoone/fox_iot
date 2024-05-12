@@ -8,17 +8,19 @@ import com.thingclips.smart.sdk.api.IThingActivatorGetToken
 import com.thingclips.smart.sdk.api.IThingSmartActivatorListener
 import com.thingclips.smart.sdk.bean.DeviceBean
 import com.thingclips.smart.sdk.enums.ActivatorModelEnum
+import io.flutter.plugin.common.MethodCall
 
-object ConnectAPDeviceMethod : IFoxIoTNativeMethod {
+object ConnectAPDeviceMethod: IFoxIoTNativeMethod {
 
-    const val HOME_ID = "home_id"
+    private val activator = ThingHomeSdk.getActivatorInstance()
+
+    override val methodName: String = "connect_using_ap"
+
     const val WIFI_NAME = "wifi_name"
     const val PASSWORD = "wifi_password"
     const val TOKEN = "token"
 
-    override val methodName: String = "connect_using_ap"
-    private val activator = ThingHomeSdk.getActivatorInstance()
-    override fun methodInvoke(args: Map<String, String?>, callback: (String) -> Unit) {
+    fun methodInvoke(args: Map<String, String?>, callback: (String) -> Unit) {
         val ssid = args[WIFI_NAME]
         val password = args[PASSWORD]
         val token = args[TOKEN]
@@ -51,12 +53,9 @@ object ConnectAPDeviceMethod : IFoxIoTNativeMethod {
         callback: (String) -> Unit,
         context: Context
     ) {
-        val homeId = args[HOME_ID]?.toLong()
         val ssid = args[WIFI_NAME]
         val password = args[PASSWORD]
         val token = args[TOKEN]
-        Log.d("?!", "Info $ssid $password $token")
-        Log.d("?!", "Connecting...")
         val builder = ActivatorBuilder()
             .setSsid(ssid)
             .setPassword(password)
@@ -80,5 +79,11 @@ object ConnectAPDeviceMethod : IFoxIoTNativeMethod {
             })
         activator.newActivator(builder).start()
     }
+
+    fun MethodCall.toConnectAPDeviceMap() = mapOf(
+            WIFI_NAME to argument<String>(WIFI_NAME),
+            PASSWORD to argument<String>(PASSWORD),
+            TOKEN to argument<String>(TOKEN)
+    )
 
 }

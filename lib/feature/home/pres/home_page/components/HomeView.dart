@@ -1,85 +1,59 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:fox_iot/res/values/theme.dart';
+import 'package:fox_iot/feature/home/pres/home_page/HomeActions.dart';
+import 'package:fox_iot/feature/home/pres/home_page/HomeBloc.dart';
+import 'package:fox_iot/feature/home/pres/home_page/HomeState.dart';
+import 'package:fox_iot/feature/home/pres/models/RoomSquareType.dart';
 
 import '../../../domain/FoxIoTRoom.dart';
 
 class HomeView extends StatelessWidget {
-  final List<FoxIoTRoom> rooms;
+  final HomePageBloc bloc;
+  final HomeState state;
 
-  HomeView(this.rooms);
+  HomeView(this.bloc, this.state);
 
   @override
   Widget build(BuildContext context) {
-    final roomsCount = 6; //rooms.length;
-    final two = findNearestPowerTwo(roomsCount);
-    final sizes = List.generate(two, (index) => FixedTrackSize(100));
     return Center(
-        child: LayoutGrid(
-            columnSizes: sizes,
-            rowSizes: sizes,
-            children: getRoomsView(roomsCount, two)));
+        child: _getRoomsView(
+            onRoomClick: (index) => bloc.add(OnRoomClick(index)),
+            addRoom: (index) => bloc.add(OnCreateRoomClick(index)),
+            rooms: state.rooms,
+            isEditingModeEnabled: state.isEditHome));
   }
 
-  int findNearestPowerTwo(int roomCount) {
-    int i = 1;
-    while (i * i < roomCount) {
-      i++;
-    }
-    return i;
-  }
-
-  List<BoxView> getRoomsView(int roomsCount, int blocCount) {
-    return List.generate(blocCount, (index) {
-      if (index <= roomsCount) return RoomView(index.toString());
-      else return AddRoomView();
+  Widget _getRoomsView(
+      {required Function(int) onRoomClick,
+      required Function(int) addRoom,
+      required List<FoxIoTRoom> rooms,
+      required bool isEditingModeEnabled}) {
+    int viewArraySize = _findNearestPowerTwo(rooms.length);
+    List<RoomSquareType> roomViewsList = List.generate(viewArraySize, (index) {
+      if (isEditingModeEnabled) {
+        return AddRoomSquare(() => addRoom(index));
+      }
+      return EmptyRoomSquare();
     });
+    for (var element in rooms) {
+      roomViewsList[element.id] =
+          RoomSquare(element.name, () => onRoomClick(element.id));
+    }
+    return LayoutGrid(
+        columnSizes: List.filled(_log2(roomViewsList.length), 100.px),
+        rowSizes: List.filled(_log2(roomViewsList.length), 100.px),
+        children: roomViewsList);
   }
-}
 
-abstract class BoxView extends StatelessWidget {}
-
-class InvisibleBoxView extends BoxView {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
+  int _findNearestPowerTwo(int roomCount) {
+    if (roomCount == 0) return 1;
+    if (roomCount < 9) return 9;
+    return 16;
   }
-}
 
-class AddRoomView extends BoxView {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: FoxIotTheme.colors.secondary,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: CircleBorder(), // This makes the button circular
-          padding: EdgeInsets.all(
-              20), // Adjust the padding to control the size of the button
-        ),
-        child: Icon(
-          Icons.add, // The "+" icon
-          size: 30, // Adjust the size of the icon
-          color: Colors.white, // Icon color
-        ),
-        onPressed: () {
-          // Handle button press
-        },
-      ),
-    );
-  }
-}
-
-class RoomView extends BoxView {
-  final String name;
-
-  RoomView(this.name);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: FoxIotTheme.colors.secondary,
-      child: Text(name),
-    );
+  int _log2(num x) {
+    return log(x) ~/ log(2);
   }
 }

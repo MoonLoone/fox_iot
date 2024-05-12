@@ -57,7 +57,7 @@ class AuthRepo extends IAuthRepo {
           Response<FoxIoTUser> userInfoResponse =
               await _getAuthorizedUserInfo(userDTO.uid);
           if (userInfoResponse is SuccessResponse) {
-            _addUserToDatabase((userInfoResponse as SuccessResponse).data);
+            await _userDb.replaceCurrentUser((userInfoResponse as SuccessResponse).data);
             onSuccessCallback();
           }
           return userDTO;
@@ -65,7 +65,6 @@ class AuthRepo extends IAuthRepo {
   }
 
   Future<Response<FoxIoTUser>> _getAuthorizedUserInfo(String userUID) async {
-    //todo Сделать интеграцию с Firestore
     return safeApiRequest(() {
       return _firebaseFirestore
           .collection("users")
@@ -73,10 +72,6 @@ class AuthRepo extends IAuthRepo {
           .get()
           .then((value) => value.toFoxIoTUser(userUID));
     });
-  }
-
-  void _addUserToDatabase(FoxIoTUser foxIoTUser) {
-    _userDb.replaceCurrentUser(foxIoTUser);
   }
 
   @override

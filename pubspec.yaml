@@ -18,7 +18,6 @@ dependencies:
   firebase_core: ^2.17.0
   firebase_auth: ^4.10.0
   cloud_firestore: ^4.15.8
-  flutter_blue: ^0.8.0
   hive: ^2.0.4
   hive_flutter: ^1.1.0
   hive_generator: ^2.0.1
@@ -28,7 +27,10 @@ dependencies:
   fluttertoast: ^8.0.8
   flutter_layout_grid: ^2.0.0
   event_bloc: ^4.6.0
-
+  webview_flutter: ^4.0.0
+  webview_flutter_web: ^0.2.2+4
+  flutter_circle_color_picker: ^0.3.0
+  color_type_converter: ^1.0.5
 
 provider:
   intl: ^0.17.0

@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fox_iot/feature/home/pres/create_home_page/CreateHomePage.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomeBloc.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomeState.dart';
+import 'package:fox_iot/feature/home/pres/home_page/components/AddRoomDialog.dart';
 import 'package:fox_iot/feature/home/pres/home_page/components/HomeView.dart';
 import 'package:fox_iot/res/components/fox_iot_buttons.dart';
 import 'package:fox_iot/res/values/assets.dart';
@@ -36,7 +37,8 @@ class HomePage extends StatelessWidget {
           (selectedHomeName) => bloc.add(ChangeHome(selectedHomeName)),
           () => bloc.add(OnChangeHomeClick()),
           () => bloc.add(OnEditHomeClick()),
-          (roomId) => bloc.add(OnRoomClick(roomId)));
+          (roomId) => bloc.add(OnRoomClick(roomId)),
+          bloc);
     });
   }
 
@@ -69,7 +71,8 @@ class HomePage extends StatelessWidget {
               SvgPicture.asset(safetyGetAsset(FoxIotAssetName.room).url,
                   width: 128, height: 128),
               const SizedBox(height: 32),
-              FoxIoTPrimaryButton(btnText:  "Create house",onClick: () => addRoom())
+              FoxIoTPrimaryButton(
+                  btnText: "Create house", onClick: () => addRoom())
             ],
           ))));
 
@@ -78,7 +81,8 @@ class HomePage extends StatelessWidget {
       Function(String) changeHome,
       Function onSelectHomeClick,
       Function onEditClick,
-      Function(String) onRoomClick) {
+      Function(int) onRoomClick,
+      HomePageBloc bloc) {
     return Background(Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: FoxNavbar(
@@ -136,7 +140,7 @@ class HomePage extends StatelessWidget {
                   shape: const CircleBorder(),
                   backgroundColor: FoxIotTheme.colors.fourth,
                   onPressed: () {
-                    onSelectHomeClick();
+                    onEditClick();
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(12),
@@ -149,7 +153,9 @@ class HomePage extends StatelessWidget {
                   )),
             ),
           ),
-          HomeView(state.currentHome?.rooms ?? List.empty())
+          HomeView(bloc, state),
+          if (state.isAddRoomDialog != null)
+            AddRoomDialog((name) => bloc.add(ApplyCreateRoomDialog(name)))
         ],
       ),
     ));

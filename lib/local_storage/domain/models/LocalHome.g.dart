@@ -19,20 +19,17 @@ class LocalHomeAdapter extends TypeAdapter<LocalHome> {
     return LocalHome(
       id: fields[0] as int,
       name: fields[1] as String,
-      rooms: (fields[2] as List).cast<LocalRoom>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, LocalHome obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(2)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name)
-      ..writeByte(2)
-      ..write(obj.rooms);
+      ..write(obj.name);
   }
 
   @override

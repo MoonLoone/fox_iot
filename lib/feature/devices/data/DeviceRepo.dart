@@ -1,24 +1,33 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:fox_iot/feature/devices/domain/IDeviceRepo.dart';
 import 'package:fox_iot/feature/devices/domain/models/Device.dart';
 import 'package:fox_iot/feature/devices/domain/models/DeviceType.dart';
+import 'package:fox_iot/utils/safe_operations.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../local_storage/domain/IFoxIoTHomeDb.dart';
+import '../../../local_storage/domain/IFoxIoTUserDb.dart';
+import '../domain/models/BulbHSVColor.dart';
 
 class DeviceRepo extends IDeviceRepo {
   static const MethodChannel channel = MethodChannel("fox_iot");
   final IFoxIoTHomeDb _homeDb = GetIt.I.get<IFoxIoTHomeDb>();
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  final IFoxIoTUserDb _userDb = GetIt.I.get<IFoxIoTUserDb>();
 
   @override
   Future<List<Device>> getUserDevices() async {
+    final cameras = await getCameras();
     final homeId = (await _homeDb.getCurrentHome())?.id;
     final String devicesString = await channel
         .invokeMethod("get_devices", {"home_id": homeId.toString()});
     final List<dynamic> devicesJson = jsonDecode(devicesString);
-    return devicesJson.map((device) => Device.fromMap(device)).toList();
+    final devices =
+        devicesJson.map((device) => Device.fromMap(device)).toList();
+    return devices + cameras;
   }
 
   @override
@@ -28,16 +37,14 @@ class DeviceRepo extends IDeviceRepo {
   }
 
   @override
-  Future connectUsingAP(String token) async {
+  Future connectUsingAP(String token, String wifiPassword, String wifiName) async {
     final homeId = (await _homeDb.getCurrentHome())?.id;
-    final wifi = "MTS_GPON_8f91c0";
-    final password = "19661966";
-    return channel.invokeMethod("connect_using_ap", {
+    return safeApiRequest(() => channel.invokeMethod("connect_using_ap", {
       "token": token,
       "home_id": homeId.toString(),
-      "wifi_name": wifi,
-      "wifi_password": password
-    });
+      "wifi_name": wifiName,
+      "wifi_password": wifiPassword
+    }));
   }
 
   @override
@@ -55,14 +62,50 @@ class DeviceRepo extends IDeviceRepo {
 
   @override
   Future getThermalData(String deviceId) async {
-    return await channel
-        .invokeMethod("get_device_data", {"devId": deviceId, "device_type": DeviceType.thermal.name});
+    return await channel.invokeMethod("get_device_data",
+        {"devId": deviceId, "device_type": DeviceType.thermal.name});
   }
 
   @override
-  Future<bool> saveCameraUrl(String cameraUrl) {
-    // TODO: implement saveCameraUrl
-    throw UnimplementedError();
+  Future saveCameraUrl(String cameraUrl) async {
+    String userId = (await _userDb.getCurrentUser())!.id;
+    _firebaseFirestore
+        .collection("cameras")
+        .add({"url": cameraUrl, "userId": userId});
+  }
+
+  @override
+  Future<List<Device>> getCameras() async {
+    String userId = (await _userDb.getCurrentUser())!.id;
+    final requestResult = await _firebaseFirestore
+        .collection("cameras")
+        .where("userId", isEqualTo: userId)
+        .get();
+    return mapFromDoc(requestResult.docs);
+  }
+
+  List<Device> mapFromDoc(
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> dataToMap) {
+    return dataToMap
+        .map((element) => Device(
+            id: element.data()["url"],
+            name: element.id,
+            deviceType: DeviceType.camera))
+        .toList();
+  }
+
+  @override
+  Future changeBulbColor(String bulbId, BulbHSVColor color) async {
+    String bulbColorMap = jsonEncode(color.toMap());
+    await channel.invokeMethod(
+        "on_off_bulb", {"bulb_id": bulbId, "color_data": bulbColorMap});
+  }
+
+  @override
+  Future<bool> onOffBulb(String bulbId, bool newState) async {
+    final String result = await channel.invokeMethod(
+        "on_off_bulb", {"bulb_id": bulbId, "new_bulb_state": newState.toString()});
+    return result == "true";
   }
 
 }

@@ -8,12 +8,11 @@ import com.thingclips.smart.home.sdk.ThingHomeSdk
 import com.thingclips.smart.home.sdk.bean.HomeBean
 import com.thingclips.smart.home.sdk.callback.IThingGetHomeListCallback
 
-object GetHomesMethod :IFoxIoTNativeMethod {
+class GetHomesMethod {
 
     private val homeManager = ThingHomeSdk.getHomeManagerInstance()
-    override val methodName: String = "get_homes"
 
-    override fun methodInvoke(args: Map<String, String?>, callback: (String) -> Unit) {
+    fun methodInvoke(args: Map<String, String?>, callback: (String) -> Unit) {
         homeManager.queryHomeList(object : IThingGetHomeListCallback{
             override fun onSuccess(homeBeans: MutableList<HomeBean>?) {
                 val domainList = homeBeans?.map { it.toDomain() }
@@ -27,4 +26,9 @@ object GetHomesMethod :IFoxIoTNativeMethod {
 
         })
     }
+
+    companion object:IFoxIoTNativeMethod{
+        override val methodName: String = "get_homes"
+    }
+
 }
