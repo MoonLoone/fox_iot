@@ -1,12 +1,11 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fox_iot/feature/home/domain/FoxIoTRoom.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomeActions.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomeState.dart';
 import 'package:fox_iot/utils/IFoxIoTActions.dart';
 import 'package:fox_iot/utils/models/LoadingState.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../../utils/models/Response.dart';
 import '../../domain/IHomeRepo.dart';
 
 class HomePageBloc extends Bloc<IFoxIoTActions, HomeState> {
@@ -16,27 +15,18 @@ class HomePageBloc extends Bloc<IFoxIoTActions, HomeState> {
     {
       on<OnInit>((event, emit) async {
         emit(state.updateState(loadingState: const Loading()));
-        await homeRepo
-            .getHouses()
-            .then((value) => emit(state.updateState(homes: value)));
-        await homeRepo
-            .getSelectedHome()
-            .then((value) => emit(state.updateState(currentHome: value)));
-        if (state.currentHome != null) {
-          await homeRepo
-              .getRooms(state.currentHome!.id.toString())
-              .then((value) {
-            if (value is SuccessResponse) {
-              emit(state.updateState(
-                  rooms: (value as SuccessResponse).data,
-                  loadingState: const NotLoading()));
-            } else {
-              emit(state.updateState(
-                  loadingState:
-                      LoadingError((value as ErrorResponse).error.toString())));
-            }
-          });
+        final currentHome = await homeRepo.getSelectedHome();
+        final homes = await homeRepo.getHouses();
+        List<FoxIoTRoom>? rooms;
+        if (currentHome != null) {
+          rooms = await homeRepo.getRooms();
         }
+
+        emit(state.updateState(
+            rooms: rooms,
+            currentHome: currentHome,
+            homes: homes,
+            loadingState: const NotLoading()));
       });
 
       on<OnChangeHomeClick>((event, emit) =>
@@ -63,10 +53,10 @@ class HomePageBloc extends Bloc<IFoxIoTActions, HomeState> {
 
       on<ApplyCreateRoomDialog>((event, emit) async {
         if (state.currentHome != null) {
-          await homeRepo.createRoom(event.roomName, state.isAddRoomDialog!,
-              state.currentHome!.id.toString());
+          await homeRepo.createRoom(event.roomName, state.isAddRoomDialog!);
         }
-        emit(state.updateState(isAddRoomDialog: null));
+        final rooms = await homeRepo.getRooms();
+        emit(state.updateState(isAddRoomDialog: null, rooms: rooms));
       });
     }
   }

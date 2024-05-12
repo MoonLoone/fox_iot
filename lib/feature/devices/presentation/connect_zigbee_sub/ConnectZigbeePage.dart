@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fox_iot/feature/devices/presentation/connect_zigbee_sub/ConnectZigbeeActions.dart';
 import 'package:fox_iot/feature/devices/presentation/connect_zigbee_sub/ConnectZigbeeBloc.dart';
 import 'package:fox_iot/feature/devices/presentation/connect_zigbee_sub/ConnectZigbeeState.dart';
+import 'package:fox_iot/feature/home/domain/FoxIoTRoom.dart';
 import 'package:fox_iot/res/components/fox_iot_buttons.dart';
 import 'package:fox_iot/utils/models/LoadingState.dart';
 
@@ -27,10 +28,14 @@ class ConnectZigbeePage extends StatelessWidget {
           return errorScreen();
         case (NotLoading()):
           return selectHub(
-              () => bloc.add(OnStartConnectingClick(state.currentGW?.id)),
+              () => bloc.add(OnStartConnectingClick(
+                  state.currentGW?.id, state.currentRoom?.id)),
               (newGw) => bloc.add(OnChangeCurrentGW(newGw)),
               state.gws,
               state.currentGW,
+              state.rooms,
+              state.currentRoom,
+              (newRoom) => bloc.add(OnChangeCurrentRoom(newRoom)),
               context);
         case (SuccessLoading()):
           return successScreen();
@@ -93,8 +98,15 @@ class ConnectZigbeePage extends StatelessWidget {
     return Text("Error");
   }
 
-  Widget selectHub(Function() startConnecting, Function(Device) changeGW,
-      List<Device> gws, Device? currentGWS, BuildContext context) {
+  Widget selectHub(
+      Function() startConnecting,
+      Function(Device) changeGW,
+      List<Device> gws,
+      Device? currentGWS,
+      List<FoxIoTRoom> rooms,
+      FoxIoTRoom? currentRoom,
+      Function(FoxIoTRoom) changeRoom,
+      BuildContext context) {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -113,6 +125,22 @@ class ConnectZigbeePage extends StatelessWidget {
             onChanged: (Device? value) {
               if (value != null) {
                 changeGW(value);
+              }
+            },
+          ),
+          SizedBox(height: 16),
+          DropdownButton<FoxIoTRoom>(
+            value: currentRoom ?? rooms.firstOrNull,
+            items: rooms
+                .map<DropdownMenuItem<FoxIoTRoom>>(
+                    (device) => DropdownMenuItem<FoxIoTRoom>(
+                          value: device,
+                          child: Text(device.name),
+                        ))
+                .toList(),
+            onChanged: (FoxIoTRoom? value) {
+              if (value != null) {
+                changeRoom(value);
               }
             },
           ),

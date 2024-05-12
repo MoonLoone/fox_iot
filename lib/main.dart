@@ -23,6 +23,7 @@ import 'package:fox_iot/feature/home/pres/create_home_page/CreateHomeBloc.dart';
 import 'package:fox_iot/feature/home/pres/create_home_page/CreateHomePage.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomeBloc.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomePage.dart';
+import 'package:fox_iot/feature/home/pres/home_page/roomPage/RoomPage.dart';
 import 'package:fox_iot/feature/rules/rules_page.dart';
 import 'package:fox_iot/feature/welcome_page/pres/welcome_page.dart';
 import 'package:fox_iot/local_storage/domain/IFoxIoTUserDb.dart';
@@ -62,6 +63,7 @@ class FoxIoTApp extends StatelessWidget {
     return MaterialApp(
       supportedLocales: S.supportedLocales,
       locale: S.locale,
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: S.localizationDelegates,
       home: _getStartWidget(currentUser),
       routes: {
@@ -110,6 +112,8 @@ class FoxIoTApp extends StatelessWidget {
               child: ConnectWithApPage(
                   ModalRoute.of(context)!.settings.arguments.toString()),
             ),
+        RoomPage.navId: (context) => RoomPage(
+            int.parse(ModalRoute.of(context)!.settings.arguments.toString())),
         ConnectZigbeePage.navId: (context) => BlocProvider(
               create: (context) => ConnectZigbeeBloc()..add(OnInit()),
               lazy: true,

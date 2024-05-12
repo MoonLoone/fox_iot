@@ -14,9 +14,18 @@ class ConnectAPBloc extends Bloc<IFoxIoTActions, ConnectAPState> {
       on<OnInitWithToken>((event, emit) async {
         emit(state.updateState(token: event.token));
       });
+
       on<ConnectClick>((event, emit) async {
-        repo.connectUsingAP(state.token, event.wifiPassword, event.wifiName);
+        repo.connectUsingAP(state.token,
+            event.wifiPassword,
+            event.wifiName,
+            state.currentRoom?.id);
       });
+
+      on<ChangeCurrentRoom>((event, emit) async {
+        emit(state.updateState(currentRoom: event.room));
+      });
+
     }
   }
 }

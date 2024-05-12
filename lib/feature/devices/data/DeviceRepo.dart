@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:fox_iot/feature/devices/domain/IDeviceRepo.dart';
 import 'package:fox_iot/feature/devices/domain/models/Device.dart';
 import 'package:fox_iot/feature/devices/domain/models/DeviceType.dart';
+import 'package:fox_iot/utils/models/Response.dart';
 import 'package:fox_iot/utils/safe_operations.dart';
 import 'package:get_it/get_it.dart';
 
@@ -20,6 +21,7 @@ class DeviceRepo extends IDeviceRepo {
 
   @override
   Future<List<Device>> getUserDevices() async {
+    _userDb.getCurrentUser();
     final cameras = await getCameras();
     final homeId = (await _homeDb.getCurrentHome())?.id;
     final String devicesString = await channel
@@ -32,28 +34,47 @@ class DeviceRepo extends IDeviceRepo {
 
   @override
   Future<String?> getToken() async {
+    _userDb.getCurrentUser();
     final home = await _homeDb.getCurrentHome();
     return channel.invokeMethod("get_token", {"home_id": home?.id.toString()});
   }
 
   @override
-  Future connectUsingAP(String token, String wifiPassword, String wifiName) async {
+  Future connectUsingAP(
+      String token, String wifiPassword, String wifiName, int? roomId) async {
+    _userDb.getCurrentUser();
     final homeId = (await _homeDb.getCurrentHome())?.id;
     return safeApiRequest(() => channel.invokeMethod("connect_using_ap", {
-      "token": token,
-      "home_id": homeId.toString(),
-      "wifi_name": wifiName,
-      "wifi_password": wifiPassword
-    }));
+          "token": token,
+          "home_id": homeId.toString(),
+          "wifi_name": wifiName,
+          "wifi_password": wifiPassword
+        })).then((value) async {
+      if (value is SuccessResponse && roomId != null) {
+        var roomSnap = await _firebaseFirestore
+            .collection("rooms")
+            .where("id", isEqualTo: roomId)
+            .limit(1)
+            .get();
+        var room = roomSnap.docs.first;
+        room.reference.update({
+          "devices":
+              FieldValue.arrayUnion([(value as SuccessResponse<String>).data])
+        });
+      }
+      return value;
+    });
   }
 
   @override
-  Future connectZigbeeSub(String hubId) {
+  Future connectZigbeeSub(String hubId, int? roomId) {
+    _userDb.getCurrentUser();
     return channel.invokeMethod("connect_zigbee", {"hub_id": hubId});
   }
 
   @override
   Future<List<Device>> getGWS() async {
+    _userDb.getCurrentUser();
     final devices = await getUserDevices();
     return devices
         .where((element) => element.deviceType == DeviceType.hub)
@@ -62,12 +83,14 @@ class DeviceRepo extends IDeviceRepo {
 
   @override
   Future getThermalData(String deviceId) async {
+    _userDb.getCurrentUser();
     return await channel.invokeMethod("get_device_data",
         {"devId": deviceId, "device_type": DeviceType.thermal.name});
   }
 
   @override
   Future saveCameraUrl(String cameraUrl) async {
+    _userDb.getCurrentUser();
     String userId = (await _userDb.getCurrentUser())!.id;
     _firebaseFirestore
         .collection("cameras")
@@ -96,6 +119,7 @@ class DeviceRepo extends IDeviceRepo {
 
   @override
   Future changeBulbColor(String bulbId, BulbHSVColor color) async {
+    _userDb.getCurrentUser();
     String bulbColorMap = jsonEncode(color.toMap());
     await channel.invokeMethod(
         "on_off_bulb", {"bulb_id": bulbId, "color_data": bulbColorMap});
@@ -103,9 +127,9 @@ class DeviceRepo extends IDeviceRepo {
 
   @override
   Future<bool> onOffBulb(String bulbId, bool newState) async {
-    final String result = await channel.invokeMethod(
-        "on_off_bulb", {"bulb_id": bulbId, "new_bulb_state": newState.toString()});
+    _userDb.getCurrentUser();
+    final String result = await channel.invokeMethod("on_off_bulb",
+        {"bulb_id": bulbId, "new_bulb_state": newState.toString()});
     return result == "true";
   }
-
 }

@@ -1,5 +1,4 @@
 import 'package:color_type_converter/exports.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fox_iot/feature/devices/presentation/connect_with_ap/ConnectAPActions.dart';
 import 'package:fox_iot/feature/devices/presentation/connect_with_ap/ConnectAPBloc.dart';
@@ -10,6 +9,7 @@ import '../../../../res/components/background.dart';
 import '../../../../res/values/assets.dart';
 import '../../../../res/values/s.dart';
 import '../../../../res/values/theme.dart';
+import '../../../home/domain/FoxIoTRoom.dart';
 
 class ConnectWithApPage extends StatelessWidget {
   static const String navId = "connect_with_ap";
@@ -92,6 +92,26 @@ class ConnectWithApPage extends StatelessWidget {
                                     ),
                                     hintText: S.of(context).password,
                                     filled: true),
+                              ),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              DropdownButton<FoxIoTRoom>(
+                                value: state.currentRoom ??
+                                    state.rooms.firstOrNull,
+                                items: state.rooms
+                                    .map<DropdownMenuItem<FoxIoTRoom>>(
+                                        (device) =>
+                                            DropdownMenuItem<FoxIoTRoom>(
+                                              value: device,
+                                              child: Text(device.name),
+                                            ))
+                                    .toList(),
+                                onChanged: (FoxIoTRoom? value) {
+                                  if (value != null) {
+                                    bloc.add(ChangeCurrentRoom(value));
+                                  }
+                                },
                               ),
                               const SizedBox(
                                 height: 24,

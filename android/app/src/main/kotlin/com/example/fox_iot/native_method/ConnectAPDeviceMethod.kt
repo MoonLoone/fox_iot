@@ -70,6 +70,7 @@ object ConnectAPDeviceMethod: IFoxIoTNativeMethod {
 
                 override fun onActiveSuccess(devResp: DeviceBean?) {
                     Log.e("?!", "Success $devResp")
+                    devResp?.devId?.let { callback(it) }
                 }
 
                 override fun onStep(step: String?, data: Any?) {

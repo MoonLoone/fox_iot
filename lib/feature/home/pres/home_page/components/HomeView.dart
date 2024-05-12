@@ -5,6 +5,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomeActions.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomeBloc.dart';
 import 'package:fox_iot/feature/home/pres/home_page/HomeState.dart';
+import 'package:fox_iot/feature/home/pres/home_page/roomPage/RoomPage.dart';
 import 'package:fox_iot/feature/home/pres/models/RoomSquareType.dart';
 
 import '../../../domain/FoxIoTRoom.dart';
@@ -19,7 +20,8 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: _getRoomsView(
-            onRoomClick: (index) => bloc.add(OnRoomClick(index)),
+            onRoomClick: (index) =>
+                Navigator.pushNamed(context, RoomPage.navId, arguments: index),
             addRoom: (index) => bloc.add(OnCreateRoomClick(index)),
             rooms: state.rooms,
             isEditingModeEnabled: state.isEditHome));
@@ -32,7 +34,7 @@ class HomeView extends StatelessWidget {
       required bool isEditingModeEnabled}) {
     int viewArraySize = _findNearestPowerTwo(rooms.length);
     List<RoomSquareType> roomViewsList = List.generate(viewArraySize, (index) {
-      if (isEditingModeEnabled) {
+      if (isEditingModeEnabled || rooms.isEmpty) {
         return AddRoomSquare(() => addRoom(index));
       }
       return EmptyRoomSquare();
@@ -54,6 +56,7 @@ class HomeView extends StatelessWidget {
   }
 
   int _log2(num x) {
+    if (x <= 1) return 1;
     return log(x) ~/ log(2);
   }
 }
